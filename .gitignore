@@ -156,3 +156,5 @@ CargoLoading/x64/
 CargoLoading/GeneratedFiles/
 CargoLoading/Debug/
 CargoLoading/Release/
+
+*.v11.suo
