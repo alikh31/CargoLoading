@@ -26,6 +26,11 @@ void GLWidget::initializeGL(){
     zRot = 0;
 
     scale = 1.0;
+
+    m_pProject = NULL;
+
+    path = NULL;
+    NodeID = -1;
 }
 
 static void qNormalizeAngle(int &angle)
@@ -92,12 +97,12 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
  *  (and also when it is shown for the first time because all newly created widgets get a resize event automatically).
  */
 void GLWidget::resizeGL (int width, int height){
-    glViewport( 0, 0, (GLint)width, (GLint)height );
+    //glViewport( 0, 0, (GLint)width, (GLint)height );
  
     /* create viewing cone with near and far clipping planes */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glFrustum( -1.0, 1.0, -1.0, 1.0, 5.0, 30.0);
+    //glFrustum( -1.0, 1.0, -1.0, 1.0, 5.0, 30.0);
  
     glMatrixMode( GL_MODELVIEW );
 }
@@ -115,15 +120,48 @@ void GLWidget::paintGL(){
  
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0.0f,0.0f,-20.0f); //move along z-axis
+    //glTranslatef(0.0f,0.0f,-20.0f); //move along z-axis
     glRotatef(xRot / 16.0, 1.0, 0.0, 0.0);
     glRotatef(yRot / 16.0, 0.0, 1.0, 0.0);
     glRotatef(zRot / 16.0, 0.0, 0.0, 1.0);
 
     glScalef(scale, scale, scale);
- 
-    drawCube(2,0,0,2.0,1.0,1.0,.8,.8,.8);  
-    drawCube(-2.1,0,0,2.0,1.0,1.0,1.0,0,0);  
+
+    if(path)
+    {
+        float norm = sqrt(pow(path->m_Carrier->Width,2)+ pow(path->m_Carrier->Height,2) + pow(path->m_Carrier->Length,2)) / 4;
+
+        if (!path->m_Carrier->m_BoxList.empty())
+        {
+            for (int j = 0; j < path->m_Carrier->m_BoxList.size() ; j++)
+            {
+                __BoxInContainer* tB = path->m_Carrier->m_BoxList.at(j);
+
+                Node * TempNode = getNode(tB->NodeId);
+
+                float r = 1;
+                float g = 1;
+                float b = 1;
+
+                if(TempNode!=NULL)
+                {
+                    __BoxRow* Box = GetBox(TempNode->m_Order->BoxID);
+                    if(Box != NULL)
+                    {
+                        QString Color =	Box->Color;
+                        QStringList rgbList = Color.split(" ");
+                        r = rgbList.at(0).toFloat();
+                        g = rgbList.at(1).toFloat();
+                        b = rgbList.at(2).toFloat();
+                    }
+                }
+
+                drawCube(float(tB->x)/norm,float(tB->y)/norm,float(tB->z)/norm,float(tB->w)/norm,float(tB->h)/norm,float(tB->d)/norm,r,g,b);  
+            }
+        }
+    }
+    //drawCube(100,0,0,100,100,100,1,1,0);  
+
  
 }
 
@@ -137,61 +175,108 @@ void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, fl
 {
     float t = 0.8f;
     /* create 3D-Cube */
+    x *= 2.0f;
+    y *= 2.0f;
+    z *= 2.0f;
+
+    w *= .9f;
+    h *= .9f;
+    d *= .9f;
+
     glBegin(GL_QUADS);
 
     //front
     glColor4f(r,g,b,t);
 
-    glVertex3f( w - x, h - y, d - z);
-    glVertex3f(-w - x, h - y, d - z);
-    glVertex3f(-w - x,-h - y, d - z);
-    glVertex3f( w - x,-h - y, d - z);
+    glVertex3f( w + x, h + y, d + z);
+    glVertex3f(-w + x, h + y, d + z);
+    glVertex3f(-w + x,-h + y, d + z);
+    glVertex3f( w + x,-h + y, d + z);
 
 
     //back
 
     glColor4f(r,g,b,t);
 
-    glVertex3f( w - x, h - y,-d - z);
-    glVertex3f(-w - x, h - y,-d - z);
-    glVertex3f(-w - x,-h - y,-d - z);
-    glVertex3f( w - x,-h - y,-d - z);
+    glVertex3f( w + x, h + y,-d + z);
+    glVertex3f(-w + x, h + y,-d + z);
+    glVertex3f(-w + x,-h + y,-d + z);
+    glVertex3f( w + x,-h + y,-d + z);
 
 
     //top
     glColor4f(r,g,b,t);
 
-    glVertex3f(-w - x, h - y, d - z);
-    glVertex3f( w - x, h - y, d - z);
-    glVertex3f( w - x, h - y,-d - z);
-    glVertex3f(-w - x, h - y,-d - z);
+    glVertex3f(-w + x, h + y, d + z);
+    glVertex3f( w + x, h + y, d + z);
+    glVertex3f( w + x, h + y,-d + z);
+    glVertex3f(-w + x, h + y,-d + z);
 
 
     //bottom
     glColor4f(r,g,b,t);
 
-    glVertex3f( w - x,-h - y, d - z);
-    glVertex3f( w - x,-h - y,-d - z);
-    glVertex3f(-w - x,-h - y,-d - z);
-    glVertex3f(-w - x,-h - y, d - z);
+    glVertex3f( w + x,-h + y, d + z);
+    glVertex3f( w + x,-h + y,-d + z);
+    glVertex3f(-w + x,-h + y,-d + z);
+    glVertex3f(-w + x,-h + y, d + z);
 
     //right
     glColor4f(r,g,b,t);
 
-    glVertex3f( w - x, h - y, d - z);
-    glVertex3f( w - x,-h - y, d - z);
-    glVertex3f( w - x,-h - y,-d - z);
-    glVertex3f( w - x, h - y,-d - z);
+    glVertex3f( w + x, h + y, d + z);
+    glVertex3f( w + x,-h + y, d + z);
+    glVertex3f( w + x,-h + y,-d + z);
+    glVertex3f( w + x, h + y,-d + z);
 
 
     //left
     glColor4f(r,g,b,t);
 
-    glVertex3f(-w - x, h - y, d - z);
-    glVertex3f(-w - x,-h - y, d - z);
-    glVertex3f(-w - x,-h - y,-d - z);
-    glVertex3f(-w - x, h - y,-d - z);
+    glVertex3f(-w + x, h + y, d + z);
+    glVertex3f(-w + x,-h + y, d + z);
+    glVertex3f(-w + x,-h + y,-d + z);
+    glVertex3f(-w + x, h + y,-d + z);
 
 
     glEnd();
 }
+
+#pragma region "Node*	GLWidget::getNode	(int NodeID)"
+Node*	GLWidget::getNode	(int NodeID)
+{
+    if (!m_pProject)
+    {
+        return NULL;
+    }
+    for(int i = 0 ; i < m_pProject->m_AllPathes.count() ; i++)
+    {
+        Path* tempPath = m_pProject->m_AllPathes.at(i);
+        for(int j = 0 ; j < tempPath->m_Node.count() ; j++)
+        {
+            Node* tempNode = tempPath->m_Node.at(j);
+            if(tempNode->id == NodeID)
+                return tempNode;
+        }
+
+    }
+    return NULL;
+}
+#pragma endregion
+
+#pragma region "__BoxRow* GLWidget::GetBox(int id)" 
+__BoxRow* GLWidget::GetBox(int id)
+{
+    if (!m_pProject)
+    {
+        return NULL;
+    }
+    for(int i=0;i<m_pProject->m_CargoList.count();i++)
+    {
+        __BoxRow* box=m_pProject->m_CargoList.at(i);
+        if(box->id==id)
+            return box;
+    }
+    return NULL;
+}
+#pragma endregion

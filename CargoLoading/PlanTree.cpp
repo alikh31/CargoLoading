@@ -84,10 +84,14 @@ void CPlanTree::itemDoubleClickedEvent ( QTreeWidgetItem * item, int column )
 #pragma region "void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column ) "
 void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column ) 
 {
-	/*if(item->parent())
-		m_pMainWindow->m_pNetworkWidget->Update(GetPath(item->parent()->text(0).toInt()),item->text(0).toInt());
-	else
-		m_pMainWindow->m_pNetworkWidget->Update(GetPath(item->text(0).toInt()));*/
+	if(item->parent()){
+        return;
+    }
+		//m_pMainWindow->m_pMainWidget->path = GetPath(item->text(0).toInt());// ->Update(GetPath(item->parent()->text(0).toInt()),item->text(0).toInt());
+	else{
+		m_pMainWindow->m_pMainWidget->path = GetPath(item->text(0).toInt());
+        m_pMainWindow->m_pMainWidget->update();
+    }
 }
 #pragma endregion
 
