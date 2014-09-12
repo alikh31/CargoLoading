@@ -2,7 +2,6 @@
 #define ADDCARGO_H
 
 #include <QDialog>
-#include <QMessageBox>
 #include "ui_addcargo.h"
 #include "GUIMainWindow.h"
 
@@ -21,7 +20,8 @@ public:
 	bool isAccepted;
 
 public slots:
-	void onClickedAccept();
+    void onClickedAccept();
+    void onClickedReject();
 
 };
 

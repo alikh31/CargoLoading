@@ -68,9 +68,9 @@ void CCargoWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pL
 #pragma region "void CCargoWidget::OnAddNewRow()"
 void CCargoWidget::OnAddNewRow(bool bOk)
 {
-	AddCargo* pAddCargo = new AddCargo(0, m_pMainWindow);
+	AddCargo pAddCargo(0, m_pMainWindow);
 
-	pAddCargo->exec();
+	pAddCargo.exec();
 
 	m_pTable->AddNewRowEvent();
 

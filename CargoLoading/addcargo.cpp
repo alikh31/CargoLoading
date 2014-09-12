@@ -9,11 +9,12 @@ AddCargo::AddCargo(QWidget *parent,CGUIMainWindow* pMainWindow)
 	
 	connect(pushButton, SIGNAL(clicked()), this, SLOT(onClickedAccept()));
 
-	connect(pushButton_2, SIGNAL(clicked()), this, SLOT(close()));
+	connect(pushButton_2, SIGNAL(clicked()), this, SLOT(onClickedReject()));
 	
-	setFixedSize(412, 230);
+	//setFixedSize(412, 230);
 	
 	isAccepted = false;
+
 
 
 
@@ -21,14 +22,15 @@ AddCargo::AddCargo(QWidget *parent,CGUIMainWindow* pMainWindow)
 	
 __BoxRow* temp = new __BoxRow();
 
-	lineEdit->setText(temp->Code);
+	lineEdit->setText(tr("%1").arg(temp->id));
+	lineEdit->setReadOnly(true);
 	lineEdit_11->setText(temp->Color);
 	lineEdit_2->setText(temp->Desc);
 	lineEdit_8->setText(temp->FloorIndex);
-	lineEdit_10->setText(QString(temp->MaxLoad));
-	lineEdit_14->setText(QString(temp->PaleteSizeH));
-	lineEdit_13->setText(QString(temp->PaleteSizeL));
-	lineEdit_12->setText(QString(temp->PaleteSizeW));
+	lineEdit_10->setText(tr("%1").arg(temp->MaxLoad));
+	lineEdit_14->setText(tr("%1").arg(temp->PaleteSizeH));
+	lineEdit_13->setText(tr("%1").arg(temp->PaleteSizeL));
+	lineEdit_12->setText(tr("%1").arg(temp->PaleteSizeW));
 	lineEdit_9->setText(tr("%1").arg(temp->Priority));
 	lineEdit_7->setText(tr("%1").arg(temp->PaleteWeight));
 
@@ -53,33 +55,36 @@ void AddCargo::onClickedAccept()
 	
 	temp->Desc= lineEdit_2->displayText();
 	if(temp->Desc==NULL)
-	
-	{
-		int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Description is Empty"));//"tozihat vared nashodeh ast"
-		return;
-	}
-	temp->FloorIndex=lineEdit_8->displayText();	
-	temp->MaxLoad=lineEdit_10->displayText().toInt();
-	if(temp->MaxLoad==NULL)
-		{
-		int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Max weight has been enter wrong"));//"bishineh bar eshtebah ast" 
-		return;
-	}
+    {
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Description is Empty"));//"tozihat vared nashodeh ast"
+        return;
+    }
+    temp->FloorIndex=lineEdit_8->displayText();	
+    temp->MaxLoad=lineEdit_10->displayText().toInt();
+    if(temp->MaxLoad==NULL)
+    {
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Max weight has been enter wrong"));//"bishineh bar eshtebah ast" 
+        return;
+    }
 
-	temp->PaleteSizeH=lineEdit_14->displayText().toInt();
-	temp->PaleteSizeL=lineEdit_13->displayText().toInt();
-	temp->PaleteSizeW=lineEdit_12->displayText().toInt();
-	temp->Priority=lineEdit_9->displayText().toInt();
-	temp->PaleteWeight=lineEdit_7->displayText().toInt();
-	if(temp->PaleteSizeH==NULL||temp->PaleteSizeL==NULL||temp->PaleteSizeW==NULL||temp->PaleteWeight==NULL)
-		{
-		int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Height, Width or weight has been enter wrong"));//"tol ya arz ya ertefae ya vazn vared nashodeh ast" 
-		return;
-	}
-
+    temp->PaleteSizeH=lineEdit_14->displayText().toInt();
+    temp->PaleteSizeL=lineEdit_13->displayText().toInt();
+    temp->PaleteSizeW=lineEdit_12->displayText().toInt();
+    temp->Priority=lineEdit_9->displayText().toInt();
+    temp->PaleteWeight=lineEdit_7->displayText().toInt();
+    if(temp->PaleteSizeH==NULL||temp->PaleteSizeL==NULL||temp->PaleteSizeW==NULL||temp->PaleteWeight==NULL)
+    {
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Height, Width or weight has been enter wrong"));//"tol ya arz ya ertefae ya vazn vared nashodeh ast" 
+        return;
+    }
 
 
 	m_pMainWindow->m_pProject->m_CargoList.append(temp);
 
 close();
+}
+
+void AddCargo::onClickedReject()
+{
+    close();
 }

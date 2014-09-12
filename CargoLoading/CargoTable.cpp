@@ -67,7 +67,7 @@ void CCargoTable::SetupActions()
 void CCargoTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewCargo();
-	m_pMainWindow->m_pCargoTab->OnAddNewRow(true);
+	//m_pMainWindow->m_pCargoTab->OnAddNewRow(true);
 	//ReLoadModel();
 
 }
