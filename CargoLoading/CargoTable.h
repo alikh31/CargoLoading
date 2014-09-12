@@ -6,8 +6,7 @@
 #include <qaction.h>
 #include "CargoModel.h"
 #include <QSortFilterProxyModel>
-
-
+#include <qalgorithms.h>
 
 class CCargoTable : public QTableView
 {

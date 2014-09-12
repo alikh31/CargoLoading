@@ -160,7 +160,6 @@ void GLWidget::paintGL(){
             }
         }
     }
-    //drawCube(100,0,0,100,100,100,1,1,0);  
 
  
 }
@@ -175,13 +174,13 @@ void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, fl
 {
     float t = 0.8f;
     /* create 3D-Cube */
-    x *= 2.0f;
-    y *= 2.0f;
-    z *= 2.0f;
+    x *= 2.0f + .1f;
+    y *= 2.0f + .1f;
+    z *= 2.0f + .1f;
 
-    w *= .9f;
+    /*w *= .9f;
     h *= .9f;
-    d *= .9f;
+    d *= .9f;*/
 
     glBegin(GL_QUADS);
 

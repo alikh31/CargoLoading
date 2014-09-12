@@ -53,7 +53,7 @@ bool COptimazedPacker::Compute(QString & OutputMessage)
 		if(m_FloorAreas.count()==0)
 		{
 			updateAllAreas();
-			OutputMessage = "It is impossible to put the hell things in this container";
+			OutputMessage = "It is impossible to put the damn packets into this container";
 			ClearMatrixs();
 			return false;
 		}
@@ -526,7 +526,8 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 	case 0:
 	case 1:
 		if(temp1->m_W > 0 && temp1->m_H > 0 )
-			m_FloorAreas.append(temp1);
+			//if(!MergeArea(temp1, false))
+				m_FloorAreas.append(temp1);
 		else
 		{
 			if(temp1 != NULL)
@@ -536,7 +537,8 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 			}
 		}
 		if(temp2->m_W > 0 && temp2->m_H > 0 )
-			m_FloorAreas.append(temp2);
+			//if(!MergeArea(temp2, false))
+				m_FloorAreas.append(temp2);
 		else
 		{
 			if(temp2 != NULL)
@@ -559,7 +561,10 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 	case 2:
 	case 3:
 		if(temp3->m_W > 0 && temp3->m_H > 0 )
-			m_FloorAreas.append(temp3);
+		{
+			//if(!MergeArea(temp3 , false))
+				m_FloorAreas.append(temp3);
+		}
 		else
 		{
 			if(temp3 != NULL)
@@ -569,7 +574,8 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 			}
 		}
 		if(temp4->m_W > 0 && temp4->m_H > 0 )
-			m_FloorAreas.append(temp4);
+			//if(!MergeArea(temp4, false))
+				m_FloorAreas.append(temp4);
 		else
 		{
 			if(temp4 != NULL)
@@ -626,7 +632,7 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 	CArea* temp2 = new CArea(matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
 
 	CArea* temp3 = new CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW,matrix->pBoxRow->PaleteSizeL, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
-	CArea* temp4 = new CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	CArea* temp4 = new CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ,m_pClosest->m_MaxLoad);
 
 	double S[4];
 
@@ -659,7 +665,8 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 	case 0:
 	case 1:
 		if(temp1->m_W > 0 && temp1->m_H > 0 )
-			m_TopAreas.append(temp1);
+			//if(!MergeArea(temp1, true))
+				m_TopAreas.append(temp1);
 		else
 		{
 			if(temp1 != NULL)
@@ -669,7 +676,8 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 			}
 		}
 		if(temp2->m_W > 0 && temp2->m_H > 0 )
-			m_TopAreas.append(temp2);
+			//if(!MergeArea(temp2, true))
+				m_TopAreas.append(temp2);
 		else
 		{
 			if(temp2 != NULL)
@@ -692,7 +700,8 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 	case 2:
 	case 3:
 		if(temp3->m_W > 0 && temp3->m_H > 0 )
-			m_TopAreas.append(temp3);
+			//if(!MergeArea(temp3, true))
+				m_TopAreas.append(temp3);
 		else
 		{
 			if(temp3 != NULL)
@@ -702,7 +711,8 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 			}
 		}
 		if(temp4->m_W > 0 && temp4->m_H > 0 )
-			m_TopAreas.append(temp4);
+			//if(!MergeArea(temp4, true))
+				m_TopAreas.append(temp4);
 		else
 		{
 			if(temp4 != NULL)
@@ -1485,6 +1495,108 @@ bool COptimazedPacker::buildNominate()
 		}
 	}
 
+	return false;
+}
+#pragma endregion
+
+#pragma region "bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)"
+bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)
+{
+	if(!isTopArea)
+	{
+		for(int i = 0; i < m_FloorAreas.count() ; i++)
+		{
+			CArea* temp = m_FloorAreas.at(i);
+			if(temp->m_FloorZ == area->m_FloorZ)
+			{
+				if(temp->m_Y == area->m_Y)
+				{
+					if(temp->m_X == (area->m_X+area->m_W))
+					{
+						//temp->m_X = area->m_X;
+
+						temp->m_W += area->m_W;
+						temp->m_MaxLoad += area->m_MaxLoad;
+						return true;
+					}
+					if((temp->m_X+temp->m_W) == area->m_X)
+					{
+						temp->m_W += area->m_W;
+						temp->m_MaxLoad += area->m_MaxLoad;
+
+						return true;
+					}
+				}
+
+				if(temp->m_X == area->m_X)
+				{
+					if(temp->m_Y == (area->m_Y+area->m_H))
+					{
+						//temp->m_Y = area->m_Y;
+
+						temp->m_H += area->m_H;
+						temp->m_MaxLoad += area->m_MaxLoad;
+						return true;
+					}
+					if((temp->m_Y+temp->m_H) == area->m_Y)
+					{
+						temp->m_H += area->m_H;
+						temp->m_MaxLoad += area->m_MaxLoad;
+
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	else
+	{
+		for(int i = 0; i < m_TopAreas.count() ; i++)
+		{
+			CArea* temp = m_TopAreas.at(i);
+			if(temp->m_FloorZ == area->m_FloorZ)
+			{
+				if(temp->m_Y == area->m_Y)
+				{
+					if(temp->m_X == (area->m_X+area->m_W))
+					{
+						//temp->m_X = area->m_X;
+
+						temp->m_W += area->m_W;
+						temp->m_MaxLoad += area->m_MaxLoad;
+						return true;
+					}
+					if((temp->m_X+temp->m_W) == area->m_X)
+					{
+						temp->m_W += area->m_W;
+						temp->m_MaxLoad += area->m_MaxLoad;
+
+						return true;
+					}
+				}
+
+				if(temp->m_X == area->m_X)
+				{
+					if(temp->m_Y == (area->m_Y+area->m_H))
+					{
+						//temp->m_Y = area->m_Y;
+
+						temp->m_H += area->m_H;
+						temp->m_MaxLoad += area->m_MaxLoad;
+						return true;
+					}
+					if((temp->m_Y+temp->m_H) == area->m_Y)
+					{
+						temp->m_H += area->m_H;
+						temp->m_MaxLoad += area->m_MaxLoad;
+
+						return true;
+					}
+				}
+			}
+		}
+	}
 	return false;
 }
 #pragma endregion

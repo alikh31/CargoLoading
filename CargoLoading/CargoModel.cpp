@@ -33,14 +33,14 @@ int CCargoModel::rowCount(const QModelIndex & ) const
 #pragma region "int CCargoModel::columnCount(const QModelIndex & ) const "
 int CCargoModel::columnCount(const QModelIndex & ) const 
 {
-	return 11;
+	return 9;
 }
 #pragma endregion
 
 #pragma region "void CCargoModel::RefreshList()"
 void CCargoModel::RefreshList()
 {
-	endResetModel();
+	reset();
 }
 #pragma endregion
 
@@ -71,7 +71,7 @@ QVariant CCargoModel::data(const QModelIndex &index, int role) const
 	{
 		if(index.column() == 0) 
 		{
-			return (QVariant) ( Qt::AlignRight  | Qt::AlignVCenter );
+			return (QVariant) ( Qt::AlignLeft  | Qt::AlignVCenter );
 		} else {
 			return (QVariant) 
 				( 
@@ -98,23 +98,23 @@ QVariant CCargoModel::data(const QModelIndex &index, int role) const
 			return rowData->id;
 		case 1:
 			return rowData->Desc;
+		//case 2:
+		//	return rowData->PalleteID;
 		case 2:
-			return rowData->PalleteID;
-		case 3:
 			return rowData->PaleteSizeL;
-		case 4:
+		case 3:
 			return rowData->PaleteSizeW;
-		case 5:
+		case 4:
 			return rowData->PaleteSizeH;
-		case 6:
+		case 5:
 			return rowData->PaleteWeight;
-		case 7:
+		case 6:
 			return rowData->FloorIndex;
-		case 8:
-			return rowData->Priority;
-		case 9:
+		//case 8:
+		//	return rowData->Priority;
+		case 7:
 			return rowData->MaxLoad;
-		case 10:
+		case 8:
 			return rowData->Color;
 		}
 	}
@@ -150,15 +150,15 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 			QString Desc =value.toString();
 			rowData->Desc=Desc;
 		}
-		else if(col==2)
+		/*else if(col==2)
 		{
 			bool bOk;
 			int PalleteID =value.toInt(&bOk);
 			if(!bOk)
 				return false;
 			rowData->PalleteID=PalleteID;
-		}
-		else if(col==3)
+		}*/
+		else if(col==2)
 		{
 			bool bOk;
 			int PaleteSizeL =value.toInt(&bOk);
@@ -166,7 +166,7 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 				return false;
 			rowData->PaleteSizeL=PaleteSizeL;
 		}
-		else if(col==4)
+		else if(col==3)
 		{
 			bool bOk;
 			int PaleteSizeW =value.toInt(&bOk);
@@ -174,7 +174,7 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 				return false;
 			rowData->PaleteSizeW=PaleteSizeW;
 		}
-		else if(col==5)
+		else if(col==4)
 		{
 			bool bOk;
 			int PaleteSizeH =value.toInt(&bOk);
@@ -182,7 +182,7 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 				return false;
 			rowData->PaleteSizeH=PaleteSizeH;
 		}
-		else if(col==6)
+		else if(col==5)
 		{
 			bool bOk;
 			double PaleteWeight =value.toDouble(&bOk);
@@ -190,19 +190,19 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 				return false;
 			rowData->PaleteWeight=PaleteWeight;
 		}
-		else if(col==7)
+		else if(col==6)
 		{
 			QString st=value.toString();
 			QString  FloorIndex =st;
 			rowData->FloorIndex=FloorIndex;
 		}
-		else if(col==8)
+		/*else if(col==8)
 		{
 			
 			bool Priority  =value.toBool();
 			rowData->Priority =Priority ;
-		}
-		else if(col==9)
+		}*/
+		else if(col==7)
 		{
 			bool bOk;
 			int MaxLoad =value.toInt(&bOk);
@@ -210,7 +210,7 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 				return false;
 			rowData->MaxLoad =MaxLoad ;
 		}
-		else if(col==10)
+		else if(col==8)
 		{
 			bool bOk;
 			QString Color =value.toString();
@@ -244,27 +244,27 @@ QVariant CCargoModel::headerData(int section, Qt::Orientation orientation, int r
 		switch(section)
 		{
 		case 0:
-			return QString("Code");//"Code"
+			return QString::fromUtf8("Code");//"Code"
 		case 1:
-			return QString("Description");//"Description"	
+			return QString::fromUtf8("Description");//"Description"	
+		//case 2:
+		//	return QString::fromUtf8("\331\206\331\210\330\271");//"Type"
 		case 2:
-			return QString("Type");//"Type"
+			return QString::fromUtf8("Length(cm)");//"Length(cm)"
 		case 3:
-			return QString("Length(cm)");//"Length(cm)"
+			return QString::fromUtf8("Width(cm)");//"Width(cm)"
 		case 4:
-			return QString("Width(cm)");//"Width(cm)"
+			return QString::fromUtf8("height(cm)");//"height(cm)"
 		case 5:
-			return QString("height(cm)");//"height(cm)"
+			return QString::fromUtf8("Weight(kg)");//"Weight(kg)"
 		case 6:
-			return QString("Weight(kg)");//"Weight(kg)"
+			return QString::fromUtf8("Floor Index");//"Floor Index"
+		//case 8:
+		//	return QString::fromUtf8("\330\247\331\210\331\204\331\210\333\214\330\252");//"Priority"
 		case 7:
-			return QString("Floor Index");//"Floor Index"
+			return QString::fromUtf8("MaxLoad");//"MaxLoad"
 		case 8:
-			return QString("Priority");//"Priority"
-		case 9:
-			return QString("MaxLoad");//"MaxLoad"
-		case 10:
-			return QString("Color");//"Color"
+			return QString::fromUtf8("Color");//"Color"
 
 		}
 	}

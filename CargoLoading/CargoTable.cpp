@@ -1,7 +1,8 @@
 #pragma region "Includes"
 #include "CargoTable.h"
 #include "GUIMainWindow.h"
-//#include "AbstractItemDelegate.h"
+#include "AbstractItemDelegate.h"
+#include "CargoWidget.h"
 #pragma endregion
 
 #pragma region "Constructor"
@@ -14,25 +15,26 @@ CCargoTable::CCargoTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSortingEnabled(true);
 	m_pModel=new CCargoModel(pMainWindow);
 	m_pSortModel=new QSortFilterProxyModel();
-	setModel(m_pModel);
+	m_pSortModel->setSourceModel(m_pModel);
+	setModel(m_pSortModel);
 	bool bres=connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ),this, SLOT( RequestForContextMenuEvent( const QPoint& ) ) );
 	bres;
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	SetupActions();
 
-	//CAbstractItemDelegate* dlegate=new CAbstractItemDelegate(this);
-	//setItemDelegate(dlegate);
-	//dlegate->m_ColumnH=2;
-	//dlegate->AddColumnWidth(20);//Code
-	//dlegate->AddColumnWidth(50);//description
-	//dlegate->AddColumnWidth(20);//type
-	//dlegate->AddColumnWidth(30);//length
-	//dlegate->AddColumnWidth(30);//width
-	//dlegate->AddColumnWidth(30);//height
-	//dlegate->AddColumnWidth(30);//weight
-	//dlegate->AddColumnWidth(50);//floor index
-	//dlegate->AddColumnWidth(20);//priority
-	//dlegate->AddColumnWidth(30);//max load
+	CAbstractItemDelegate* dlegate=new CAbstractItemDelegate(this);
+	setItemDelegate(dlegate);
+	dlegate->m_ColumnH=2;
+	dlegate->AddColumnWidth(20);//Code
+	dlegate->AddColumnWidth(50);//description
+	dlegate->AddColumnWidth(20);//type
+	dlegate->AddColumnWidth(30);//length
+	dlegate->AddColumnWidth(30);//width
+	dlegate->AddColumnWidth(30);//height
+	dlegate->AddColumnWidth(30);//weight
+	dlegate->AddColumnWidth(50);//floor index
+	dlegate->AddColumnWidth(20);//priority
+	dlegate->AddColumnWidth(30);//max load
 
 	resizeColumnsToContents();
 	resizeRowsToContents();
@@ -65,7 +67,8 @@ void CCargoTable::SetupActions()
 void CCargoTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewCargo();
-	ReLoadModel();
+	m_pMainWindow->m_pCargoTab->OnAddNewRow(true);
+	//ReLoadModel();
 
 }
 #pragma endregion
@@ -73,6 +76,24 @@ void CCargoTable::AddNewRowEvent( )
 #pragma region "void CCargoTable::DeleteEvent( )"
 void CCargoTable::DeleteEvent( )
 {
+	int row;
+	QList<int> deleteList;
+	for (int i = 0; i < m_SelectedIndexes.count(); ++i)
+	{
+		QModelIndex Sindex = m_SelectedIndexes.at(i);
+		QModelIndex index = m_pSortModel->mapToSource(Sindex);
+		row=index.row();
+		deleteList.append(row);
+	}
+
+	qSort(deleteList.begin(), deleteList.end());
+
+	while (!deleteList.isEmpty())
+	{
+		row = deleteList.takeLast();
+		m_pMainWindow->m_pProject->m_CargoList.removeAt(row);
+	}
+	ReLoadModel();
 
 }
 #pragma endregion
@@ -115,7 +136,7 @@ void CCargoTable::ReLoadModel()
 	delete m_pModel;
 	m_pModel=NULL;
 	m_pModel=new CCargoModel(m_pMainWindow);
-	setModel(m_pModel);
+	setModel(m_pSortModel);
 	Update();
 }
 #pragma endregion

@@ -5,7 +5,7 @@
 #include "Project.h"
 #ifndef __OPTMAZED_PACKER_H
 #define __OPTMAZED_PACKER_H
-
+	
 
 class MATRIX
 {
@@ -20,8 +20,8 @@ public:
 			}
 		}
 
-		maxRow = 0;
-		maxCol = 0;
+		maxRow = -1;
+		maxCol = -1;
 	}
 	~MATRIX()
 	{
@@ -198,6 +198,8 @@ public:
 	void buildMatrixAnyway();
 
 	bool  buildNominate();
+
+	bool MergeArea(CArea* area, bool isTopArea);
 
 public:
 	QList<MATRIX*> mNominate;
