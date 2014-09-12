@@ -1,6 +1,7 @@
 #pragma region "Includes"
 #include "OrderTable.h"
 #include "GUIMainWindow.h"
+#include "OrderWidget.h"
 #pragma endregion
 
 #pragma region "Constructor"
@@ -13,7 +14,8 @@ COrderTable::COrderTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSortingEnabled(true);
 	m_pModel=new COrderModel(pMainWindow);
 	m_pSortModel=new QSortFilterProxyModel();
-	setModel(m_pModel);
+	m_pSortModel->setSourceModel(m_pModel);
+	setModel(m_pSortModel);
 	bool bres=connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ),this, SLOT( RequestForContextMenuEvent( const QPoint& ) ) );
 	bres;
 	setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -33,12 +35,12 @@ void COrderTable::SetupActions()
 {
 	m_pMenu=new QMenu();
 
-	m_pMenu->addAction(QString("Copy"));//"copy"
-	m_pMenu->addAction(QString("Paste"));//"paste"
+	m_pMenu->addAction(QString("copy"));//"copy"
+	m_pMenu->addAction(QString("paste"));//"paste"
 	m_pAddNewRowAct = m_pMenu->addAction(QString("Add New Row"));//"Add New Row"
 	connect(m_pAddNewRowAct , SIGNAL(triggered()),this, SLOT(AddNewRowEvent()));
 	
-	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected Row"));//"Delete Selected"
+	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
 #pragma endregion
@@ -47,7 +49,10 @@ void COrderTable::SetupActions()
 void COrderTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewOrder();
-	ReLoadModel();
+
+	m_pMainWindow->m_pCurrentOrderListTab->OnAddNewRow(true);
+
+	///ReLoadModel();
 
 }
 #pragma endregion
@@ -55,7 +60,24 @@ void COrderTable::AddNewRowEvent( )
 #pragma region "void COrderTable::DeleteEvent( )"
 void COrderTable::DeleteEvent( )
 {
+	int row;
+	QList<int> deleteList;
+	for (int i = 0; i < m_SelectedIndexes.count(); ++i)
+	{
+		QModelIndex Sindex = m_SelectedIndexes.at(i);
+		QModelIndex index = m_pSortModel->mapToSource(Sindex);
+		row=index.row();
+		deleteList.append(row);
+	}
 
+	qSort(deleteList.begin(), deleteList.end());
+
+	while (!deleteList.isEmpty())
+	{
+		row = deleteList.takeLast();
+		m_pMainWindow->m_pProject->m_OrderList.removeAt(row);
+	}
+	ReLoadModel();
 }
 #pragma endregion
 
@@ -97,6 +119,6 @@ void COrderTable::ReLoadModel()
 	delete m_pModel;
 	m_pModel=NULL;
 	m_pModel=new COrderModel(m_pMainWindow);
-	setModel(m_pModel);
+	setModel(m_pSortModel);
 }
 #pragma endregion

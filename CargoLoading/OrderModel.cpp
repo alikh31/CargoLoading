@@ -1,6 +1,7 @@
 #pragma region "Includes"
 #include "OrderModel.h"
 #include "GUIMainWindow.h"
+#include "JalaliCalendar.h"
 
 
 #pragma endregion
@@ -40,7 +41,7 @@ int COrderModel::columnCount(const QModelIndex & ) const
 #pragma region "void COrderModel::RefreshList()"
 void COrderModel::RefreshList()
 {
-	endResetModel();
+	reset();
 }
 #pragma endregion
 
@@ -71,7 +72,7 @@ QVariant COrderModel::data(const QModelIndex &index, int role) const
 	{
 		if(index.column() == 0) 
 		{
-			return (QVariant) ( Qt::AlignRight  | Qt::AlignVCenter );
+			return (QVariant) ( Qt::AlignLeft  | Qt::AlignVCenter );
 		} else {
 			return (QVariant) 
 				( 
@@ -94,6 +95,10 @@ QVariant COrderModel::data(const QModelIndex &index, int role) const
 		__BoxRow* box=m_pMainWindow->m_pProject->GetBox(rowData->BoxID);
 		__Provider* provider=m_pMainWindow->m_pProject->GetProvider(rowData->ProviderID);
 		QString tmp;
+		QDate GDate(1360 , 1 , 1);			
+		CJalaliCalendar calender;
+		int day , month , year;
+
 		switch(col)
 		{
 		/*case 0:
@@ -106,9 +111,13 @@ QVariant COrderModel::data(const QModelIndex &index, int role) const
 		case 1:
 			return rowData->count;
 		case 2:
-			return rowData->minTime;
+			GDate = GDate.addDays(rowData->minTime);
+			//calender.GregorianToJalali(GDate.year() ,GDate.month() , GDate.day() , &year ,&month , &day);
+			return QString("%1/%2/%3").arg(GDate.day() ).arg(GDate.month()).arg(GDate.year());
 		case 3:
-			return rowData->maxTime;
+			GDate = GDate.addDays(rowData->maxTime);
+			//calender.GregorianToJalali(GDate.year() ,GDate.month() , GDate.day() , &year ,&month , &day);
+			return QString("%1/%2/%3").arg(GDate.day() ).arg(GDate.month()).arg(GDate.year());
 		case 4:
 			if(provider)
 				return provider->name;
@@ -142,7 +151,8 @@ bool COrderModel::setData(const QModelIndex &index, const QVariant &value, int r
 		{
 			return false;
 		}
-		else */if(col==0)
+		else */
+		if(col==0)
 		{
 			QString name=value.toString();
 			__BoxRow* box=m_pMainWindow->m_pProject->GetBoxByName(name);
@@ -165,20 +175,37 @@ bool COrderModel::setData(const QModelIndex &index, const QVariant &value, int r
 		else if(col==2)
 		{
 			bool bOk;
-			/*QString date=value.toString();
+			QString date=value.toString();
 			QStringList dateList = date.split("/");
-			int day = dateList.operator*/
-			int minTime=value.toInt(&bOk);
-			if(!bOk)
+			int day = dateList[0].toInt(&bOk);
+			int month = dateList[1].toInt(&bOk);
+			int year = dateList[2].toInt(&bOk);
+
+			QDate GDate(year , month , day);
+
+			int minTime=QDate(1360,1,1).daysTo(GDate);
+
+			if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 1360)
 				return false;
+
 			rowData->minTime=minTime;
 		}
 		else if(col==3)
 		{
 			bool bOk;
-			int maxTime=value.toInt(&bOk);
-			if(!bOk)
+			QString date=value.toString();
+			QStringList dateList = date.split("/");
+			int day = dateList[0].toInt(&bOk);
+			int month = dateList[1].toInt(&bOk);
+			int year = dateList[2].toInt(&bOk);
+
+			QDate GDate(year , month , day);
+
+			int maxTime=QDate(1360,1,1).daysTo(GDate);
+
+			if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 1360)
 				return false;
+
 			rowData->maxTime=maxTime;
 		}
 		else if(col==4)
@@ -221,17 +248,17 @@ QVariant COrderModel::headerData(int section, Qt::Orientation orientation, int r
 		switch(section)
 		{
 		/*case 0:
-			return QString("Code");//"Code"*/
+			return QString::fromUtf8("\332\251\330\257");//"Code"*/
 		case 0:
-			return QString("Pallet name");//"pallete name"
+			return QString::fromUtf8("\331\206\330\247\331\205 \331\276\330\247\331\204\330\252");//"pallete name"
 		case 1:
-			return QString("Count");//"count"
+			return QString::fromUtf8("\330\264\331\205\330\247\330\261\330\264");//"count"
 		case 2:
-			return QString("Min Time");//"mintime"
+			return QString::fromUtf8("\330\255\330\257\330\247\331\202\331\204 \330\262\331\205\330\247\331\206");//"mintime"
 		case 3:
-			return QString("Max Time");//"maxtime"
+			return QString::fromUtf8("\330\255\330\257\330\247\332\251\330\253\330\261\330\262\331\205\330\247\331\206");//"maxtime"
 		case 4:
-			return QString("Provider Name");//"providername"
+			return QString::fromUtf8("\331\206\330\247\331\205 \330\252\331\207\333\214\331\207 \332\251\331\206\331\206\330\257\331\207");//"providername"
 		}
 	}
 	else 
