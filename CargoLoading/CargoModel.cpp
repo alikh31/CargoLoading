@@ -40,7 +40,7 @@ int CCargoModel::columnCount(const QModelIndex & ) const
 #pragma region "void CCargoModel::RefreshList()"
 void CCargoModel::RefreshList()
 {
-	reset();
+    endResetModel();
 }
 #pragma endregion
 

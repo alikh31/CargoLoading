@@ -1,7 +1,7 @@
 #pragma region "Includes"
 #include "OrderModel.h"
 #include "GUIMainWindow.h"
-#include "JalaliCalendar.h"
+//#include "JalaliCalendar.h"
 
 
 #pragma endregion
@@ -41,7 +41,7 @@ int COrderModel::columnCount(const QModelIndex & ) const
 #pragma region "void COrderModel::RefreshList()"
 void COrderModel::RefreshList()
 {
-	reset();
+    endResetModel();
 }
 #pragma endregion
 
@@ -96,7 +96,7 @@ QVariant COrderModel::data(const QModelIndex &index, int role) const
 		__Provider* provider=m_pMainWindow->m_pProject->GetProvider(rowData->ProviderID);
 		QString tmp;
 		QDate GDate(1360 , 1 , 1);			
-		CJalaliCalendar calender;
+        //CJalaliCalendar calender;
 		int day , month , year;
 
 		switch(col)
