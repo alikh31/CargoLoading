@@ -99,7 +99,7 @@ QVariant CCarrierModel::data(const QModelIndex &index, int role) const
 		case 1:
 			return rowData->name;
 		case 2:
-			return rowData->Length;
+			return rowData->Depth;
 		case 3:
 			return rowData->Width;
 		case 4:
@@ -150,7 +150,7 @@ bool CCarrierModel::setData(const QModelIndex &index, const QVariant &value, int
 			int Length=value.toInt(&bOk);
 			if(!bOk)
 				return false;
-			rowData->Length=Length;
+			rowData->Depth=Length;
 		}
 		else if(col==3)
 		{

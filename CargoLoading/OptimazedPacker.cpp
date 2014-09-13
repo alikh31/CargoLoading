@@ -1502,6 +1502,7 @@ bool COptimazedPacker::buildNominate()
 #pragma region "bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)"
 bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)
 {
+    return false;
 	if(!isTopArea)
 	{
 		for(int i = 0; i < m_FloorAreas.count() ; i++)

@@ -129,10 +129,51 @@ void GLWidget::paintGL(){
 
     if(path)
     {
-        float norm = sqrt(pow(path->m_Carrier->Width,2)+ pow(path->m_Carrier->Height,2) + pow(path->m_Carrier->Length,2)) / 4;
+        float norm = sqrt(pow(path->m_Carrier->Width,2)+ pow(path->m_Carrier->Height,2) + pow(path->m_Carrier->Depth,2)) / 4;
 
         if (!path->m_Carrier->m_BoxList.empty())
         {
+            float W=path->m_Carrier->Width;
+            float H=path->m_Carrier->Height;
+            float D=path->m_Carrier->Depth;
+
+            W*=1.1;
+            H*=1.1;
+            D*=1.1;
+
+            W/= norm;
+            H/= norm;
+            D/= norm;
+
+            float a = W;
+            float b1 = H;
+            float c = D;
+
+           /* float tF = W;
+            W = D;
+            D = tF;*/
+
+            float focalDistance = sqrt(a*a+b1*b1+c*c);
+
+            //drawCube(0,0,0,W,D,H,0,.2,0);
+
+            drawCube(0,0,0,W,focalDistance/100,focalDistance/100,0,1,0);
+            drawCube(0,H,0,W,focalDistance/100,focalDistance/100,0,1,0);
+            drawCube(0,0,D,W,focalDistance/100,focalDistance/100,0,1,0);
+            drawCube(0,H,D,W,focalDistance/100,focalDistance/100,0,1,0);
+
+            drawCube(0,0,0,focalDistance/100,H,focalDistance/100,1,0,0);
+            drawCube(0,0,D,focalDistance/100,H,focalDistance/100,1,0,0);
+            drawCube(W,0,0,focalDistance/100,H,focalDistance/100,1,0,0);
+            drawCube(W,0,D,focalDistance/100,H,focalDistance/100,1,0,0);
+
+            drawCube(0,0,0,focalDistance/100,focalDistance/100,D,0,0,1);
+            drawCube(W,0,0,focalDistance/100,focalDistance/100,D,0,0,1);
+            drawCube(0,H,0,focalDistance/100,focalDistance/100,D,0,0,1);
+            drawCube(W,H,0,focalDistance/100,focalDistance/100,D,0,0,1);
+
+            //drawCube(-0.1,-0.1,-0.1,W,H,0.1,0,0,1);
+
             for (int j = 0; j < path->m_Carrier->m_BoxList.size() ; j++)
             {
                 __BoxInContainer* tB = path->m_Carrier->m_BoxList.at(j);
@@ -156,7 +197,7 @@ void GLWidget::paintGL(){
                     }
                 }
 
-                drawCube(float(tB->x)/norm,float(tB->y)/norm,float(tB->z)/norm,float(tB->w)/norm,float(tB->h)/norm,float(tB->d)/norm,r,g,b);  
+                drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->h*.9f)/norm,float(tB->d*.9f)/norm,r,g,b);  
             }
         }
     }
@@ -174,71 +215,76 @@ void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, fl
 {
     float t = 0.8f;
     /* create 3D-Cube */
-    x *= 2.0f + .1f;
-    y *= 2.0f + .1f;
-    z *= 2.0f + .1f;
+    //x = x+w/2.0f;
+    //y = y+h/2.0f;
+    //z = z+d/2.0f;
+    /*w *= .3f;
+    h *= .3f;
+    d *= .3f;*/
 
-    /*w *= .9f;
-    h *= .9f;
-    d *= .9f;*/
+    w *= .5f;
+    h *= .5f;
+    d *= .5f;
 
+    glTranslatef(x+w,y+h,z+d);
     glBegin(GL_QUADS);
 
     //front
     glColor4f(r,g,b,t);
 
-    glVertex3f( w + x, h + y, d + z);
-    glVertex3f(-w + x, h + y, d + z);
-    glVertex3f(-w + x,-h + y, d + z);
-    glVertex3f( w + x,-h + y, d + z);
+    glVertex3f( w , h , d);
+    glVertex3f(-w , h , d);
+    glVertex3f(-w ,-h , d);
+    glVertex3f( w ,-h , d);
 
 
     //back
 
     glColor4f(r,g,b,t);
 
-    glVertex3f( w + x, h + y,-d + z);
-    glVertex3f(-w + x, h + y,-d + z);
-    glVertex3f(-w + x,-h + y,-d + z);
-    glVertex3f( w + x,-h + y,-d + z);
+    glVertex3f( w , h ,-d);
+    glVertex3f(-w , h ,-d);
+    glVertex3f(-w ,-h ,-d);
+    glVertex3f( w ,-h ,-d);
 
 
     //top
     glColor4f(r,g,b,t);
 
-    glVertex3f(-w + x, h + y, d + z);
-    glVertex3f( w + x, h + y, d + z);
-    glVertex3f( w + x, h + y,-d + z);
-    glVertex3f(-w + x, h + y,-d + z);
+    glVertex3f(-w , h , d);
+    glVertex3f( w , h , d);
+    glVertex3f( w , h ,-d);
+    glVertex3f(-w , h ,-d);
 
 
     //bottom
     glColor4f(r,g,b,t);
 
-    glVertex3f( w + x,-h + y, d + z);
-    glVertex3f( w + x,-h + y,-d + z);
-    glVertex3f(-w + x,-h + y,-d + z);
-    glVertex3f(-w + x,-h + y, d + z);
+    glVertex3f( w ,-h , d);
+    glVertex3f( w ,-h ,-d);
+    glVertex3f(-w ,-h ,-d);
+    glVertex3f(-w ,-h , d);
 
     //right
     glColor4f(r,g,b,t);
 
-    glVertex3f( w + x, h + y, d + z);
-    glVertex3f( w + x,-h + y, d + z);
-    glVertex3f( w + x,-h + y,-d + z);
-    glVertex3f( w + x, h + y,-d + z);
+    glVertex3f( w , h , d);
+    glVertex3f( w ,-h , d);
+    glVertex3f( w ,-h ,-d);
+    glVertex3f( w , h ,-d);
 
 
     //left
     glColor4f(r,g,b,t);
 
-    glVertex3f(-w + x, h + y, d + z);
-    glVertex3f(-w + x,-h + y, d + z);
-    glVertex3f(-w + x,-h + y,-d + z);
-    glVertex3f(-w + x, h + y,-d + z);
+    glVertex3f(-w , h , d);
+    glVertex3f(-w ,-h , d);
+    glVertex3f(-w ,-h ,-d);
+    glVertex3f(-w , h ,-d);
 
 
     glEnd();
+    glTranslatef(-(x+w),-(y+h),-(z+d));
 }
 
 #pragma region "Node*	GLWidget::getNode	(int NodeID)"

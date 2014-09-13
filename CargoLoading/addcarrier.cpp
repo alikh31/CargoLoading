@@ -37,10 +37,10 @@ void Addcarrier::onClickedAccept()
 		int ret = QMessageBox::warning(this, QString("Warning!"),QString("the name is not valid"));//"error","name does not found"
 		return;
 	}
-	temp->Length=lineEdit_3->displayText().toInt();
+	temp->Depth=lineEdit_3->displayText().toInt();
 	temp->Width=lineEdit_4->displayText().toInt();
 	temp->Height=lineEdit_5->displayText().toInt();
-	if (temp->Length==NULL ||temp->Width==NULL||temp->Height==NULL)
+	if (temp->Depth==NULL ||temp->Width==NULL||temp->Height==NULL)
 	{
 	    int ret=QMessageBox::warning(this,QString("Warning!"),QString("Height width or depth is invalid"));//"tol ya arz ya ertefae vared nashodeh ast"
 	    return;

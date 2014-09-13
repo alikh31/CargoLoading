@@ -230,7 +230,7 @@ public:
 	__Carrier()
 	{
 		id=CarrierCounter;
-		Length=0;
+		Depth=0;
 		Width=0;
 		Height=0;
 		MaxLoad=0;
@@ -242,7 +242,7 @@ public:
 	{
 		id=carrier.id;
 		name = carrier.name;
-		Length=carrier.Length;
+		Depth=carrier.Depth;
 		Width=carrier.Width;
 		Height=carrier.Height;
 		MaxLoad=carrier.MaxLoad;
@@ -304,7 +304,7 @@ public:
 public:
 	int		id;
 	QString name;
-	int Length;//cm
+	int Depth;//cm
 	int Width;//cm
 	int Height;//cm
 	int MaxLoad;//kg
@@ -318,7 +318,7 @@ public:
 	{
 		pBuffer->AddTail(id);
 		pBuffer->AddTail(name);
-		pBuffer->AddTail(Length);
+		pBuffer->AddTail(Depth);
 		pBuffer->AddTail(Width);
 		pBuffer->AddTail(Height);
 		pBuffer->AddTail(MaxLoad);
@@ -329,7 +329,7 @@ public:
 	{
 		id=pBuffer->GetHeadI();
 		name=pBuffer->GetHeadST();
-		Length=pBuffer->GetHeadI();
+		Depth=pBuffer->GetHeadI();
 		Width=pBuffer->GetHeadI();
 		Height=pBuffer->GetHeadI();
 		MaxLoad=pBuffer->GetHeadI();
