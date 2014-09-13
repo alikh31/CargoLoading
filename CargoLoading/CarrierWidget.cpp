@@ -2,7 +2,7 @@
 #include "CarrierWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSpacerItem >
+//#include <QSpacerItem >
 #include "addcarrier.h"
 #pragma endregion
 

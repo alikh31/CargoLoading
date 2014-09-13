@@ -2,7 +2,7 @@
 #include "OrderWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSpacerItem >
+//#include <QSpacerItem >
 #include "PlanTree.h"
 #include "addorder.h"
 #include <QMessageBox>

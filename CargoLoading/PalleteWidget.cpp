@@ -2,7 +2,7 @@
 #include "PalleteWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSpacerItem >
+//#include <QSpacerItem >
 #pragma endregion
 
 #pragma region "Constructor"

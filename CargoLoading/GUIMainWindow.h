@@ -37,7 +37,7 @@ public:
 	CPlanTree					*m_pPlanTree;
 	QDockWidget					*m_pPlanWidget;
 	QTableView					*m_pCurrentPlanTab;
-    GLWidget                    *m_pMainWidget;
+    GLWidget                    *m_pGLWidget;
 	//CShortKeysDV				*m_pShortkeyDV;
 	//CNetworkWidget				*m_pNetworkWidget;
 	

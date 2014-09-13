@@ -4,7 +4,7 @@
 #include "ProviderWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSpacerItem >
+//#include <QSpacerItem >
 #include <addprovider.h>
 #pragma endregion
 

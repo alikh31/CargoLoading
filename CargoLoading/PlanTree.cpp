@@ -89,8 +89,8 @@ void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column )
     }
 		//m_pMainWindow->m_pMainWidget->path = GetPath(item->text(0).toInt());// ->Update(GetPath(item->parent()->text(0).toInt()),item->text(0).toInt());
 	else{
-		m_pMainWindow->m_pMainWidget->path = GetPath(item->text(0).toInt());
-        m_pMainWindow->m_pMainWidget->update();
+		m_pMainWindow->m_pGLWidget->path = GetPath(item->text(0).toInt());
+        m_pMainWindow->m_pGLWidget->update();
     }
 }
 #pragma endregion

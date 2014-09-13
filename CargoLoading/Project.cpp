@@ -186,37 +186,37 @@ void CProject::AddNewOrder()
 #pragma region "void CProject::ClearAll()"
 void CProject::ClearAll()
 {
-	delete m_pBuff;
-	m_pBuff=NULL;
-	foreach(__BoxRow* item,m_CargoList)
-	{
-		delete item;
-		item=NULL;
-	}
-	m_CargoList.clear();
-	foreach(__Provider* item,m_ProviderList)
-	{
-		delete item;
-		item=NULL;
-	}
-	m_ProviderList.clear();
-	foreach(__Carrier* item,m_CarrierList)
-	{
-		delete item;
-		item=NULL;
-	}
-	m_CarrierList.clear();
-	foreach(__Pallete* item,m_PalleteList)
-	{
-		delete item;
-		item=NULL;
-	}
-	m_PalleteList.clear();
-	foreach(__Order* item,m_OrderList)
-	{
-		delete item;
-		item=NULL;
-	}
+    /*delete m_pBuff;
+    m_pBuff=NULL;
+    foreach(__BoxRow* item,m_CargoList)
+    {
+    delete item;
+    item=NULL;
+    }
+    m_CargoList.clear();
+    foreach(__Provider* item,m_ProviderList)
+    {
+    delete item;
+    item=NULL;
+    }
+    m_ProviderList.clear();
+    foreach(__Carrier* item,m_CarrierList)
+    {
+    delete item;
+    item=NULL;
+    }
+    m_CarrierList.clear();
+    foreach(__Pallete* item,m_PalleteList)
+    {
+    delete item;
+    item=NULL;
+    }
+    m_PalleteList.clear();
+    foreach(__Order* item,m_OrderList)
+    {
+    delete item;
+    item=NULL;
+    }*/
 	m_OrderList.clear();
 }
 #pragma endregion 

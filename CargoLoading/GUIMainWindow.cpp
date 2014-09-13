@@ -65,7 +65,6 @@ void CGUIMainWindow::setupCentralWidget()
 	m_pCurrentOrderListTab= new COrderWidget(QString("Current Order"), this,this);
 	m_pCurrentOrderListTab->setObjectName(QString("Current Order"));//5-Current Order
 	
-	//center->addTab(m_pCurrentOrderListTab, QString::fromUtf8("\330\263\331\201\330\247\330\261\330\264\330\247\330\252 \330\254\330\247\330\261\333\214"));//5-CurrentOrder
 	addDockWidget(Qt::LeftDockWidgetArea , m_pCurrentOrderListTab);
 	m_pViewMenu->addAction(m_pCurrentOrderListTab->toggleViewAction());
 
@@ -73,15 +72,15 @@ void CGUIMainWindow::setupCentralWidget()
 
 	/*m_pNetworkWidget=new CNetworkWidget(m_pProject,this,this);
 	m_pNetworkWidget->resize(this->size().width() /3,this->size().height() /2);*/
-    m_pMainWidget = new GLWidget(this);
-    m_pMainWidget->resize(this->size().width() /3,this->size().height() /2);
+    m_pGLWidget = new GLWidget(this);
+    m_pGLWidget->resize(this->size().width() /3,this->size().height() /2);
     //m_pMainWidget->show();
 
 	m_pPlanTree= new CPlanTree(this,this,m_pProject);
 	QSplitter *CurrentOrderSplitter = new QSplitter;
 	CurrentOrderSplitter->setOrientation(Qt::Vertical);
 	CurrentOrderSplitter->addWidget(m_pPlanTree);
-	CurrentOrderSplitter->addWidget(m_pMainWidget);
+	CurrentOrderSplitter->addWidget(m_pGLWidget);
 	m_pPlanTree->setObjectName(QString("All Orders"));//"6-All Orders"
 	m_pPlanWidget->setWidget(CurrentOrderSplitter);
 	m_pPlanWidget->setMinimumWidth(this->width()/2);
@@ -99,11 +98,7 @@ void CGUIMainWindow::setupCentralWidget()
 	m_pCurrentOrderListTab->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	m_pPlanWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);*/
 
-
-	//setCentralWidget(m_pNetworkWidget);
-	//return;
-	//setCentralWidget(center);
-
+    return;
 }
 #pragma endregion
 
@@ -225,7 +220,7 @@ void CGUIMainWindow::OpenProject()
 
 		}
 	}
-    m_pMainWidget->m_pProject = m_pProject;
+    m_pGLWidget->m_pProject = m_pProject;
 	return;
 }
 #pragma endregion

@@ -2,7 +2,7 @@
 #include "CargoWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSpacerItem >
+//#include <QSpacerItem >
 #include "addcargo.h"
 #pragma endregion
 
