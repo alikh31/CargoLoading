@@ -50,9 +50,9 @@ void COrderTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewOrder();
 
-	m_pMainWindow->m_pCurrentOrderListTab->OnAddNewRow(true);
+	//m_pMainWindow->m_pCurrentOrderListTab->OnAddNewRow(true);
 
-	///ReLoadModel();
+	ReLoadModel();
 
 }
 #pragma endregion

@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     //CargoLoading w;
     //w.show();
 
-    a.setLayoutDirection(Qt::RightToLeft);
+    //a.setLayoutDirection(Qt::RightToLeft);
     CGUIMainWindow w;
     w.show();
 

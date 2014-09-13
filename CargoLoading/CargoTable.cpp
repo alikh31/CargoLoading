@@ -68,7 +68,7 @@ void CCargoTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewCargo();
 	//m_pMainWindow->m_pCargoTab->OnAddNewRow(true);
-	//ReLoadModel();
+	ReLoadModel();
 
 }
 #pragma endregion

@@ -70,11 +70,7 @@ void COrderWidget::OnAddNewRow(bool bOk)
 
 	pAddOrder->exec();
 
-	if(pAddOrder->isAccepted)
-	{
-		m_pTable->AddNewRowEvent();
-	}
-
+	m_pTable->AddNewRowEvent();
 
 }
 #pragma endregion

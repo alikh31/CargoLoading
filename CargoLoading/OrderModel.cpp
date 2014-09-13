@@ -248,17 +248,17 @@ QVariant COrderModel::headerData(int section, Qt::Orientation orientation, int r
 		switch(section)
 		{
 		/*case 0:
-			return QString::fromUtf8("\332\251\330\257");//"Code"*/
+			return QString("Code");//"Code"*/
 		case 0:
-			return QString::fromUtf8("\331\206\330\247\331\205 \331\276\330\247\331\204\330\252");//"pallete name"
+			return QString("pallete name");//"pallete name"
 		case 1:
-			return QString::fromUtf8("\330\264\331\205\330\247\330\261\330\264");//"count"
+			return QString("count");//"count"
 		case 2:
-			return QString::fromUtf8("\330\255\330\257\330\247\331\202\331\204 \330\262\331\205\330\247\331\206");//"mintime"
+			return QString("min time");//"mintime"
 		case 3:
-			return QString::fromUtf8("\330\255\330\257\330\247\332\251\330\253\330\261\330\262\331\205\330\247\331\206");//"maxtime"
+			return QString("max time");//"maxtime"
 		case 4:
-			return QString::fromUtf8("\331\206\330\247\331\205 \330\252\331\207\333\214\331\207 \332\251\331\206\331\206\330\257\331\207");//"providername"
+			return QString("provider name");//"providername"
 		}
 	}
 	else 

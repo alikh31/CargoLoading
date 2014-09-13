@@ -9,7 +9,7 @@
  */
 void GLWidget::initializeGL(){
     //activate the depth buffer
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
     glEnable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
 
@@ -73,9 +73,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 {
     lastPos = event->pos();
 }
-//! [9]
 
-//! [10]
 void GLWidget::mouseMoveEvent(QMouseEvent *event)
 {
     int dx = event->x() - lastPos.x();
