@@ -9,8 +9,8 @@
  */
 void GLWidget::initializeGL(){
     //activate the depth buffer
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-    glEnable(GL_BLEND);
+    glEnable (GL_BLEND); 
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
 
     rot_x = 0;
@@ -76,8 +76,8 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event)
 {
-    int dx = event->x() - lastPos.x();
-    int dy = event->y() - lastPos.y();
+    int dx = - event->x() + lastPos.x();
+    int dy = - event->y() + lastPos.y();
 
     if (event->buttons() & Qt::LeftButton) {
         setXRotation(xRot + 8 * dy);
@@ -131,46 +131,28 @@ void GLWidget::paintGL(){
 
         if (!path->m_Carrier->m_BoxList.empty())
         {
-            float W=path->m_Carrier->Width;
-            float H=path->m_Carrier->Height;
-            float D=path->m_Carrier->Depth;
+            float W = path->m_Carrier->Width  / (norm * .9f);
+            float H = path->m_Carrier->Height / (norm * .9f);
+            float D = path->m_Carrier->Depth  / (norm * .9f);
 
-            W*=1.1;
-            H*=1.1;
-            D*=1.1;
+            float scaleFactor = norm / 10000;
 
-            W/= norm;
-            H/= norm;
-            D/= norm;
+            drawCube(0,0,0,W,scaleFactor,scaleFactor,0,1,0);
+            drawCube(0,H,0,W,scaleFactor,scaleFactor,0,1,0);
+            drawCube(0,0,D,W,scaleFactor,scaleFactor,0,1,0);
+            drawCube(0,H,D,W,scaleFactor,scaleFactor,0,1,0);
 
-            float a = W;
-            float b1 = H;
-            float c = D;
+            drawCube(0,0,0,scaleFactor,H,scaleFactor,1,0,0);
+            drawCube(0,0,D,scaleFactor,H,scaleFactor,1,0,0);
+            drawCube(W,0,0,scaleFactor,H,scaleFactor,1,0,0);
+            drawCube(W,0,D,scaleFactor,H,scaleFactor,1,0,0);
 
-           /* float tF = W;
-            W = D;
-            D = tF;*/
+            drawCube(0,0,0,scaleFactor,scaleFactor,D,0,0,1);
+            drawCube(W,0,0,scaleFactor,scaleFactor,D,0,0,1);
+            drawCube(0,H,0,scaleFactor,scaleFactor,D,0,0,1);
+            drawCube(W,H,0,scaleFactor,scaleFactor,D,0,0,1);
 
-            float focalDistance = sqrt(a*a+b1*b1+c*c);
-
-            //drawCube(0,0,0,W,D,H,0,.2,0);
-
-            drawCube(0,0,0,W,focalDistance/100,focalDistance/100,0,1,0);
-            drawCube(0,H,0,W,focalDistance/100,focalDistance/100,0,1,0);
-            drawCube(0,0,D,W,focalDistance/100,focalDistance/100,0,1,0);
-            drawCube(0,H,D,W,focalDistance/100,focalDistance/100,0,1,0);
-
-            drawCube(0,0,0,focalDistance/100,H,focalDistance/100,1,0,0);
-            drawCube(0,0,D,focalDistance/100,H,focalDistance/100,1,0,0);
-            drawCube(W,0,0,focalDistance/100,H,focalDistance/100,1,0,0);
-            drawCube(W,0,D,focalDistance/100,H,focalDistance/100,1,0,0);
-
-            drawCube(0,0,0,focalDistance/100,focalDistance/100,D,0,0,1);
-            drawCube(W,0,0,focalDistance/100,focalDistance/100,D,0,0,1);
-            drawCube(0,H,0,focalDistance/100,focalDistance/100,D,0,0,1);
-            drawCube(W,H,0,focalDistance/100,focalDistance/100,D,0,0,1);
-
-            //drawCube(-0.1,-0.1,-0.1,W,H,0.1,0,0,1);
+            drawCube(-scaleFactor,-scaleFactor,-scaleFactor,W,scaleFactor,D,0,0,1);
 
             for (int j = 0; j < path->m_Carrier->m_BoxList.size() ; j++)
             {
@@ -195,7 +177,7 @@ void GLWidget::paintGL(){
                     }
                 }
 
-                drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->h*.9f)/norm,float(tB->d*.9f)/norm,r,g,b);  
+                drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->d*.9f)/norm,float(tB->h*.9f)/norm,r,g,b);  
             }
         }
     }
