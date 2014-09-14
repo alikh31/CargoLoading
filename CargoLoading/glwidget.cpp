@@ -125,8 +125,12 @@ void GLWidget::paintGL(){
 
     glScalef(scale, scale, scale);
 
-    if(path)
+    if(path && m_pProject)
     {
+        if(!path->m_Carrier){
+            return;
+        }
+
         float norm = sqrt(pow(path->m_Carrier->Width,2)+ pow(path->m_Carrier->Height,2) + pow(path->m_Carrier->Depth,2)) / 4;
 
         if (!path->m_Carrier->m_BoxList.empty())
@@ -152,13 +156,17 @@ void GLWidget::paintGL(){
             drawCube(0,H,0,scaleFactor,scaleFactor,D,0,0,1);
             drawCube(W,H,0,scaleFactor,scaleFactor,D,0,0,1);
 
-            drawCube(-scaleFactor,-scaleFactor,-scaleFactor,W,scaleFactor,D,0,0,1);
+            drawCube(-scaleFactor,-scaleFactor,-scaleFactor,W,scaleFactor,D,0,0,0.4f);
 
             for (int j = 0; j < path->m_Carrier->m_BoxList.size() ; j++)
             {
                 __BoxInContainer* tB = path->m_Carrier->m_BoxList.at(j);
 
                 Node * TempNode = getNode(tB->NodeId);
+                if (!TempNode)
+                {
+                    continue;
+                }
 
                 float r = 1;
                 float g = 1;
@@ -174,6 +182,10 @@ void GLWidget::paintGL(){
                         r = rgbList.at(0).toFloat();
                         g = rgbList.at(1).toFloat();
                         b = rgbList.at(2).toFloat();
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
 
@@ -194,13 +206,6 @@ void GLWidget::wheelEvent(QWheelEvent *e)
 void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b)
 {
     float t = 0.8f;
-    /* create 3D-Cube */
-    //x = x+w/2.0f;
-    //y = y+h/2.0f;
-    //z = z+d/2.0f;
-    /*w *= .3f;
-    h *= .3f;
-    d *= .3f;*/
 
     w *= .5f;
     h *= .5f;

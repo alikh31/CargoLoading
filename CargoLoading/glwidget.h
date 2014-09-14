@@ -45,6 +45,8 @@ private:
 
     float scale;
 
+    float aspect;
+
 private:
 
     int xRot;

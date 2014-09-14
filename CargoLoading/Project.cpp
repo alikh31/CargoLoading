@@ -269,7 +269,7 @@ bool CProject::Open(QString fileName)
 		m_OrderList.append(pOrder);
 	}
 
-	file1.close();	
+	file1.close();
 
 	return true;
 }
