@@ -250,12 +250,12 @@ bool CProject::Open(QString fileName)
 	}
 	m_OrderList.clear();
 
-	QFile file1(fileName);
-	if(!file1.open(QIODevice::ReadOnly))
+	QFile InputDataFile(fileName);
+	if(!InputDataFile.open(QIODevice::ReadOnly))
 		return false;
 
 	QByteArray bArray1;
-	bArray1=file1.readAll();
+	bArray1=InputDataFile.readAll();
 	char* ch1=bArray1.data();
 	if(!m_pBuff)
 		m_pBuff=new CBuffer();
@@ -269,7 +269,7 @@ bool CProject::Open(QString fileName)
 		m_OrderList.append(pOrder);
 	}
 
-	file1.close();
+	InputDataFile.close();
 
 	return true;
 }

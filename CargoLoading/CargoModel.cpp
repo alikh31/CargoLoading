@@ -98,10 +98,8 @@ QVariant CCargoModel::data(const QModelIndex &index, int role) const
 			return rowData->id;
 		case 1:
 			return rowData->Desc;
-		//case 2:
-		//	return rowData->PalleteID;
 		case 2:
-			return rowData->PaleteSizeL;
+			return rowData->PaleteSizeD;
 		case 3:
 			return rowData->PaleteSizeW;
 		case 4:
@@ -110,8 +108,6 @@ QVariant CCargoModel::data(const QModelIndex &index, int role) const
 			return rowData->PaleteWeight;
 		case 6:
 			return rowData->FloorIndex;
-		//case 8:
-		//	return rowData->Priority;
 		case 7:
 			return rowData->MaxLoad;
 		case 8:
@@ -150,21 +146,13 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 			QString Desc =value.toString();
 			rowData->Desc=Desc;
 		}
-		/*else if(col==2)
-		{
-			bool bOk;
-			int PalleteID =value.toInt(&bOk);
-			if(!bOk)
-				return false;
-			rowData->PalleteID=PalleteID;
-		}*/
 		else if(col==2)
 		{
 			bool bOk;
 			int PaleteSizeL =value.toInt(&bOk);
 			if(!bOk)
 				return false;
-			rowData->PaleteSizeL=PaleteSizeL;
+			rowData->PaleteSizeD=PaleteSizeL;
 		}
 		else if(col==3)
 		{
@@ -244,27 +232,27 @@ QVariant CCargoModel::headerData(int section, Qt::Orientation orientation, int r
 		switch(section)
 		{
 		case 0:
-			return QString::fromUtf8("Code");//"Code"
+			return QString("Code");//"Code"
 		case 1:
-			return QString::fromUtf8("Description");//"Description"	
+			return QString("Description");//"Description"	
 		//case 2:
-		//	return QString::fromUtf8("\331\206\331\210\330\271");//"Type"
+		//	return QString("Type");//"Type"
 		case 2:
-			return QString::fromUtf8("Length(cm)");//"Length(cm)"
+			return QString("Length(cm)");//"Length(cm)"
 		case 3:
-			return QString::fromUtf8("Width(cm)");//"Width(cm)"
+			return QString("Width(cm)");//"Width(cm)"
 		case 4:
-			return QString::fromUtf8("height(cm)");//"height(cm)"
+			return QString("height(cm)");//"height(cm)"
 		case 5:
-			return QString::fromUtf8("Weight(kg)");//"Weight(kg)"
+			return QString("Weight(kg)");//"Weight(kg)"
 		case 6:
-			return QString::fromUtf8("Floor Index");//"Floor Index"
+			return QString("Floor Index");//"Floor Index"
 		//case 8:
-		//	return QString::fromUtf8("\330\247\331\210\331\204\331\210\333\214\330\252");//"Priority"
+		//	return QString("Priority");//"Priority"
 		case 7:
-			return QString::fromUtf8("MaxLoad");//"MaxLoad"
+			return QString("MaxLoad");//"MaxLoad"
 		case 8:
-			return QString::fromUtf8("Color");//"Color"
+			return QString("Color");//"Color"
 
 		}
 	}

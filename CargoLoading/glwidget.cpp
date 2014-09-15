@@ -31,6 +31,8 @@ void GLWidget::initializeGL(){
 
     path = NULL;
     NodeID = -1;
+
+    aspect = 1;
 }
 
 static void qNormalizeAngle(int &angle)
@@ -95,13 +97,16 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
  *  (and also when it is shown for the first time because all newly created widgets get a resize event automatically).
  */
 void GLWidget::resizeGL (int width, int height){
-    //glViewport( 0, 0, (GLint)width, (GLint)height );
+    aspect = (float)width/((height == 0) ? 1 : (float)height);
+
+    glViewport( 0, 0, (GLint)width, (GLint)height );
  
     /* create viewing cone with near and far clipping planes */
-    glMatrixMode(GL_PROJECTION);
+    //glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //glFrustum( -1.0, 1.0, -1.0, 1.0, 5.0, 30.0);
- 
+    //glFrustum( -1, 1, -1, 1, .5, 10.0);
+    
+
     glMatrixMode( GL_MODELVIEW );
 }
  
@@ -123,7 +128,7 @@ void GLWidget::paintGL(){
     glRotatef(yRot / 16.0, 0.0, 1.0, 0.0);
     glRotatef(zRot / 16.0, 0.0, 0.0, 1.0);
 
-    glScalef(scale, scale, scale);
+    glScalef(scale/(1+((aspect-1)/2)), scale*(1+((aspect-1)/2)), scale);
 
     if(path && m_pProject)
     {
@@ -138,6 +143,8 @@ void GLWidget::paintGL(){
             float W = path->m_Carrier->Width  / (norm * .9f);
             float H = path->m_Carrier->Height / (norm * .9f);
             float D = path->m_Carrier->Depth  / (norm * .9f);
+
+            glTranslatef(-W/2,-H/2,-D/2);
 
             float scaleFactor = norm / 10000;
 

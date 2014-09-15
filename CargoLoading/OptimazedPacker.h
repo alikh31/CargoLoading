@@ -199,18 +199,18 @@ public:
 
 	bool  buildNominate();
 
-	bool MergeArea(CArea* area, bool isTopArea);
+	bool MergeArea(__CArea* area, bool isTopArea);
 
 public:
 	QList<MATRIX*> mNominate;
 	QList<MATRIX*> mNominate2;
 
 
-	QList<CArea*> m_FloorAreas;
-	QList<CArea*> m_TopAreas;
+	QList<__CArea*> m_FloorAreas;
+	QList<__CArea*> m_TopAreas;
 
-	QList<CArea*> m_ALLFloorAreas;
-	QList<CArea*> m_ALLTopAreas;
+	QList<__CArea*> m_ALLFloorAreas;
+	QList<__CArea*> m_ALLTopAreas;
 
 	QList<BOX_PAIR*> m_ListBoxPairs;
 	QList<__BoxRow*> m_UnAssignedBoxes;
@@ -220,7 +220,7 @@ public:
 
 	__Carrier* m_Carrier;
 
-	CArea* m_pClosest;
+	__CArea* m_pClosest;
 };
 
 #endif

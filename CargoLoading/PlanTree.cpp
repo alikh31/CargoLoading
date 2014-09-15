@@ -147,7 +147,7 @@ void CPlanTree::CreateBody()
 			__BoxRow *boxRow = GetBox(node->m_Order->BoxID);
 			list.clear();
 
-			list<<QString("%1").arg(node->id)<<QString("Node type : %1 ,Provider: %2,Distance from the last Node: %3 , Number: %4").arg(boxRow->Desc).arg(node->m_Order->Provider->name).arg(node->m_Dist).arg(node->m_Order->count);//"Node type : %1 ,Provider: %2,Distance from the last Node: %3 , Number: %4"
+			list<<QString("%1").arg(node->id)<<QString("Node type : %1 ,Provider: %2,Distance from the last Node: %3 , Number: %4").arg(boxRow->Desc).arg(node->m_Order->pProvider->name).arg(node->m_Dist).arg(node->m_Order->count);//"Node type : %1 ,Provider: %2,Distance from the last Node: %3 , Number: %4"
 
 			m_pNodeItem=new QTreeWidgetItem(m_pPathItem,list);
 

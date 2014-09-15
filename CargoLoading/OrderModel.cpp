@@ -215,7 +215,7 @@ bool COrderModel::setData(const QModelIndex &index, const QVariant &value, int r
 			if(provider)
 			{
 				rowData->ProviderID=provider->id;
-				rowData->Provider = provider;
+				rowData->pProvider = provider;
 				return true;
 			}
 			else

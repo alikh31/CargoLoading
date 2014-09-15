@@ -29,7 +29,7 @@ __BoxRow* temp = new __BoxRow();
 	lineEdit_8->setText(temp->FloorIndex);
 	lineEdit_10->setText(tr("%1").arg(temp->MaxLoad));
 	lineEdit_14->setText(tr("%1").arg(temp->PaleteSizeH));
-	lineEdit_13->setText(tr("%1").arg(temp->PaleteSizeL));
+	lineEdit_13->setText(tr("%1").arg(temp->PaleteSizeD));
 	lineEdit_12->setText(tr("%1").arg(temp->PaleteSizeW));
 	lineEdit_9->setText(tr("%1").arg(temp->Priority));
 	lineEdit_7->setText(tr("%1").arg(temp->PaleteWeight));
@@ -68,11 +68,11 @@ void AddCargo::onClickedAccept()
     }
 
     temp->PaleteSizeH=lineEdit_14->displayText().toInt();
-    temp->PaleteSizeL=lineEdit_13->displayText().toInt();
+    temp->PaleteSizeD=lineEdit_13->displayText().toInt();
     temp->PaleteSizeW=lineEdit_12->displayText().toInt();
     temp->Priority=lineEdit_9->displayText().toInt();
     temp->PaleteWeight=lineEdit_7->displayText().toInt();
-    if(temp->PaleteSizeH==NULL||temp->PaleteSizeL==NULL||temp->PaleteSizeW==NULL||temp->PaleteWeight==NULL)
+    if(temp->PaleteSizeH==NULL||temp->PaleteSizeD==NULL||temp->PaleteSizeW==NULL||temp->PaleteWeight==NULL)
     {
         int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Height, Width or weight has been enter wrong"));//"tol ya arz ya ertefae ya vazn vared nashodeh ast" 
         return;

@@ -14,8 +14,7 @@ struct __BoxRow
 	{
 		id=BoxCounter;
 		NodeId = 0;
-		PalleteID=0;
-		PaleteSizeL=0;
+		PaleteSizeD=0;
 		PaleteSizeW=0;
 		PaleteSizeH=0;
 		PaleteWeight=0;
@@ -28,11 +27,10 @@ struct __BoxRow
 	int id;
 	QString Code;
 	QString Desc;
-	int		PalleteID;
 
 	int NodeId;
 
-	int     PaleteSizeL;//cm
+	int     PaleteSizeD;//cm
 	int     PaleteSizeW;//cm
 	int     PaleteSizeH;//cm
 
@@ -49,8 +47,7 @@ struct __BoxRow
 		pBuffer->AddTail(id);
 		pBuffer->AddTail(Code);
 		pBuffer->AddTail(Desc);
-		pBuffer->AddTail(PalleteID);
-		pBuffer->AddTail(PaleteSizeL);
+		pBuffer->AddTail(PaleteSizeD);
 		pBuffer->AddTail(PaleteSizeW);
 		pBuffer->AddTail(PaleteSizeH);
 		pBuffer->AddTail(PaleteWeight);
@@ -66,8 +63,7 @@ struct __BoxRow
 		id=pBuffer->GetHeadI();
 		Code=pBuffer->GetHeadST();
 		Desc=pBuffer->GetHeadST();
-		PalleteID=pBuffer->GetHeadI();
-		PaleteSizeL=pBuffer->GetHeadI();
+		PaleteSizeD=pBuffer->GetHeadI();
 		PaleteSizeW=pBuffer->GetHeadI();
 		PaleteSizeH=pBuffer->GetHeadI();
 		PaleteWeight=pBuffer->GetHeadD();
@@ -175,10 +171,10 @@ struct __Provider
 #pragma endregion
 
 #pragma region "CArea"
-class CArea
+class __CArea
 {
 public:
-	CArea(double W = 0,double H = 0,double X = 0,double Y = 0,double FloorZ = 0,double TopZ = 0,int maxLoad = 0)
+	__CArea(double W = 0,double H = 0,double X = 0,double Y = 0,double FloorZ = 0,double TopZ = 0,int maxLoad = 0)
 	{
 		m_X = X;
 		m_Y = Y;
@@ -189,7 +185,7 @@ public:
 		m_MaxLoad = maxLoad;
 	};
 
-	CArea(const CArea& area)
+	__CArea(const __CArea& area)
 	{
 		m_X = area.m_X;
 		m_Y = area.m_Y;
@@ -200,7 +196,7 @@ public:
 		m_MaxLoad = area.m_MaxLoad;
 	};
 
-	~CArea()
+	~__CArea()
 	{
 
 	};
@@ -213,7 +209,7 @@ public:
 
 	int m_MaxLoad;
 
-	bool isEqual(CArea* pClosest)
+	bool isEqual(__CArea* pClosest)
 	{
 		if (m_FloorZ == pClosest->m_FloorZ && m_H == pClosest->m_H && m_W == pClosest->m_W
 			&& m_X == pClosest->m_X && m_Y == pClosest->m_Y && m_TopZ == pClosest->m_TopZ)
@@ -252,14 +248,14 @@ public:
 		m_FloorAreas.clear();
 		for(int i = 0;i<carrier.m_FloorAreas.count(); i++)
 		{
-			CArea* TEMP = new CArea(*carrier.m_FloorAreas.at(i));
+			__CArea* TEMP = new __CArea(*carrier.m_FloorAreas.at(i));
 			m_FloorAreas.append(TEMP);
 		}
 
 		m_TopAreas.clear();
 		for(int i = 0;i<carrier.m_TopAreas.count(); i++)
 		{
-			CArea* TEMP = new CArea(*carrier.m_TopAreas.at(i));
+			__CArea* TEMP = new __CArea(*carrier.m_TopAreas.at(i));
 			m_TopAreas.append(TEMP);
 		}
 
@@ -274,7 +270,7 @@ public:
 	{
 		while (!m_FloorAreas.isEmpty())
 		{
-			CArea* TEMP = m_FloorAreas.takeFirst();
+			__CArea* TEMP = m_FloorAreas.takeFirst();
 			if(TEMP!=NULL)
 			{
 				delete TEMP;
@@ -283,7 +279,7 @@ public:
 		}
 		while (!m_TopAreas.isEmpty())
 		{
-			CArea* TEMP = m_TopAreas.takeFirst();
+			__CArea* TEMP = m_TopAreas.takeFirst();
 			if(TEMP!=NULL)
 			{
 				delete TEMP;
@@ -308,10 +304,10 @@ public:
 	int Width;//cm
 	int Height;//cm
 	int MaxLoad;//kg
-	long CostPerKm;//Rial
+	long CostPerKm;//$
 	int VahicleType;
-	QList<CArea*> m_FloorAreas;
-	QList<CArea*> m_TopAreas;
+	QList<__CArea*> m_FloorAreas;
+	QList<__CArea*> m_TopAreas;
 	static int CarrierCounter;
 	QList<__BoxInContainer*> m_BoxList;
 	void SaveToBuffer(CBuffer* pBuffer)
@@ -401,7 +397,7 @@ struct __Order
 		 maxTime= order.maxTime;
 		 distFromCenter= order.distFromCenter;
 		 ProviderID= order.ProviderID;
-		 Provider= new __Provider(*order.Provider);
+		 pProvider= new __Provider(*order.pProvider);
 		
 	}
 	int id;
@@ -411,7 +407,7 @@ struct __Order
 	int maxTime;
 	double distFromCenter;
 	int ProviderID;
-	__Provider* Provider;
+	__Provider* pProvider;
 	static int OrderCounter;
 	void PrepareBoxList()
 	{
@@ -586,14 +582,14 @@ public:
 
 		for(int i = 0;i<path.m_Carrier->m_FloorAreas.count(); i++)
 		{
-			CArea* TEMP = new CArea();
+			__CArea* TEMP = new __CArea();
 			*TEMP = *path.m_Carrier->m_FloorAreas.at(i);
 			m_Carrier->m_FloorAreas.append(TEMP);
 		}
 
 		for(int i = 0;i<path.m_Carrier->m_TopAreas.count(); i++)
 		{
-			CArea* TEMP = new CArea();
+			__CArea* TEMP = new __CArea();
 			*TEMP = *path.m_Carrier->m_TopAreas.at(i);
 			m_Carrier->m_TopAreas.append(TEMP);
 		}
@@ -641,13 +637,13 @@ public:
 		double TotalArea = 0;
 		for(int i = 0 ; i < m_Carrier->m_FloorAreas.count() ; i++)
 		{
-			CArea* Temp = m_Carrier->m_FloorAreas.at(i);
+			__CArea* Temp = m_Carrier->m_FloorAreas.at(i);
 			TotalArea += (double)Temp->m_H * (double)Temp->m_W *((double)Temp->m_TopZ-(double)Temp->m_FloorZ);
 		}
 
 		for(int i = 0 ; i < m_Carrier->m_TopAreas.count() ; i++)
 		{
-			CArea* Temp = m_Carrier->m_TopAreas.at(i);
+			__CArea* Temp = m_Carrier->m_TopAreas.at(i);
 			TotalArea += (double)Temp->m_H * (double)Temp->m_W *((double)Temp->m_TopZ-(double)Temp->m_FloorZ);
 		}
 

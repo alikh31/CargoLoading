@@ -95,7 +95,7 @@ bool COptimazedPacker::Compute(QString & OutputMessage)
 			{
 				for (int i = 0 ; i < m_FloorAreas.count() ; i++)
 				{
-					CArea* Temp = m_FloorAreas.at(i);
+					__CArea* Temp = m_FloorAreas.at(i);
 					if(Temp->isEqual(m_pClosest))
 					{
 
@@ -200,7 +200,7 @@ bool COptimazedPacker::Compute(QString & OutputMessage)
 			{
 				for (int i = 0 ; i < m_TopAreas.count() ; i++)
 				{
-					CArea* Temp = m_TopAreas.at(i);
+					__CArea* Temp = m_TopAreas.at(i);
 					if(Temp->isEqual(m_pClosest))
 					{
 
@@ -320,7 +320,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 				}
 				if (j[0] == 1)
 				{
-					w = matrix->pBoxRow->PaleteSizeL;
+					w = matrix->pBoxRow->PaleteSizeD;
 					isWL = true;
 				}
 				if (j[0] == 2)
@@ -338,7 +338,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 				}
 				if (j[0] == 1)
 				{
-					h = matrix->pBoxRow->PaleteSizeL;
+					h = matrix->pBoxRow->PaleteSizeD;
 					isHL = true;
 				}
 				if (j[0] == 2)
@@ -359,7 +359,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 				}
 				if (j[1] == 1)
 				{
-					w = matrix->pBoxRow->PaleteSizeL;
+					w = matrix->pBoxRow->PaleteSizeD;
 					isWL = true;
 				}
 				if (j[1] == 2)
@@ -377,7 +377,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 				}
 				if (j[1] == 1)
 				{
-					h = matrix->pBoxRow->PaleteSizeL;
+					h = matrix->pBoxRow->PaleteSizeD;
 					isHL = true;
 				}
 				if (j[1] == 2)
@@ -391,7 +391,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 			if(isWW)
 			{
 				if(isHH)
-					d = matrix->pBoxRow->PaleteSizeL;
+					d = matrix->pBoxRow->PaleteSizeD;
 				if(isHL)
 					d = matrix->pBoxRow->PaleteSizeH;
 			}
@@ -399,7 +399,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 			if(isWH)
 			{
 				if(isHW)
-					d = matrix->pBoxRow->PaleteSizeL;
+					d = matrix->pBoxRow->PaleteSizeD;
 				if(isHL)
 					d = matrix->pBoxRow->PaleteSizeW;
 			}
@@ -428,7 +428,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 			}
 
 			matrix->pBoxRow->PaleteSizeW = w;
-			matrix->pBoxRow->PaleteSizeL = h;
+			matrix->pBoxRow->PaleteSizeD = h;
 			matrix->pBoxRow->PaleteSizeH = d;
 
 			mBox->ContainerID = 0;
@@ -442,11 +442,11 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 
 	if(isTopArea)
 	{
-		CArea* temp;
+		__CArea* temp;
 		if( m_pClosest->m_MaxLoad > matrix->pBoxRow->MaxLoad)
-			temp  = new CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X , m_pClosest->m_Y , m_pClosest->m_FloorZ + matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , matrix->pBoxRow->MaxLoad - matrix->pBoxRow->PaleteWeight);
+			temp  = new __CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X , m_pClosest->m_Y , m_pClosest->m_FloorZ + matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , matrix->pBoxRow->MaxLoad - matrix->pBoxRow->PaleteWeight);
 		else
-			temp  = new CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X , m_pClosest->m_Y , m_pClosest->m_FloorZ + matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , m_pClosest->m_MaxLoad  - matrix->pBoxRow->PaleteWeight);
+			temp  = new __CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X , m_pClosest->m_Y , m_pClosest->m_FloorZ + matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , m_pClosest->m_MaxLoad  - matrix->pBoxRow->PaleteWeight);
 
 		m_TopAreas.append(temp);
 
@@ -456,11 +456,11 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 	else
 	{
 
-		CArea* temp;
+		__CArea* temp;
 		if( m_pClosest->m_MaxLoad > matrix->pBoxRow->MaxLoad)
-			temp  = new CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X , m_pClosest->m_Y , matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , matrix->pBoxRow->MaxLoad - matrix->pBoxRow->PaleteWeight);
+			temp  = new __CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X , m_pClosest->m_Y , matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , matrix->pBoxRow->MaxLoad - matrix->pBoxRow->PaleteWeight);
 		else
-			temp  = new CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X , m_pClosest->m_Y , matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , m_pClosest->m_MaxLoad  - matrix->pBoxRow->PaleteWeight);
+			temp  = new __CArea(matrix->pBoxRow->PaleteSizeW ,matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X , m_pClosest->m_Y , matrix->pBoxRow->PaleteSizeH , m_pClosest->m_TopZ , m_pClosest->m_MaxLoad  - matrix->pBoxRow->PaleteWeight);
 
 		m_TopAreas.append(temp);
 
@@ -486,12 +486,12 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 {
 	double SArea = m_pClosest->m_H * m_pClosest->m_W;
 
-	CArea* temp1 = new CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
-	CArea* temp2 = new CArea(matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp1 = new __CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp2 = new __CArea(matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H - matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeD, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
 
 
-	CArea* temp3 = new CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW,matrix->pBoxRow->PaleteSizeL, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
-	CArea* temp4 = new CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp3 = new __CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW,matrix->pBoxRow->PaleteSizeD, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp4 = new __CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeD, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
 
 	double S[4];
 
@@ -599,13 +599,13 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 
 	for(int i = 0; i < m_FloorAreas.count() ; i++)
 	{
-		CArea* TEMP = m_FloorAreas.at(i);
+		__CArea* TEMP = m_FloorAreas.at(i);
 		if(TEMP == m_pClosest)
 		{
 			m_FloorAreas.removeAt(i);
 			for (int j = 0 ; j < m_ALLFloorAreas.count() ; j++)
 			{
-				CArea* Temp = m_ALLFloorAreas.at(j);
+				__CArea* Temp = m_ALLFloorAreas.at(j);
 				if(Temp->isEqual(m_pClosest))
 				{
 					m_ALLFloorAreas.removeAt(j);
@@ -628,11 +628,11 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 {
 	double SArea = m_pClosest->m_H * m_pClosest->m_W;
 
-	CArea* temp1 = new CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
-	CArea* temp2 = new CArea(matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp1 = new __CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp2 = new __CArea(matrix->pBoxRow->PaleteSizeW, m_pClosest->m_H - matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeD, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
 
-	CArea* temp3 = new CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW,matrix->pBoxRow->PaleteSizeL, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
-	CArea* temp4 = new CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeL , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeL, m_pClosest->m_FloorZ, m_pClosest->m_TopZ,m_pClosest->m_MaxLoad);
+	__CArea* temp3 = new __CArea( m_pClosest->m_W - matrix->pBoxRow->PaleteSizeW,matrix->pBoxRow->PaleteSizeD, m_pClosest->m_X+matrix->pBoxRow->PaleteSizeW, m_pClosest->m_Y, m_pClosest->m_FloorZ, m_pClosest->m_TopZ, m_pClosest->m_MaxLoad);
+	__CArea* temp4 = new __CArea( m_pClosest->m_W , m_pClosest->m_H - matrix->pBoxRow->PaleteSizeD , m_pClosest->m_X, m_pClosest->m_Y + matrix->pBoxRow->PaleteSizeD, m_pClosest->m_FloorZ, m_pClosest->m_TopZ,m_pClosest->m_MaxLoad);
 
 	double S[4];
 
@@ -736,13 +736,13 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 
 	for(int i = 0; i < m_TopAreas.count() ; i++)
 	{
-		CArea* TEMP = m_TopAreas.at(i);
+		__CArea* TEMP = m_TopAreas.at(i);
 		if(TEMP == m_pClosest)
 		{
 			m_TopAreas.removeAt(i);
 			for (int j = 0 ; j < m_ALLTopAreas.count() ; j++)
 			{
-				CArea* Temp = m_ALLTopAreas.at(j);
+				__CArea* Temp = m_ALLTopAreas.at(j);
 				if(Temp->isEqual(m_pClosest))
 				{
 					m_ALLTopAreas.removeAt(j);
@@ -867,7 +867,7 @@ bool COptimazedPacker::isLimitsChackes(MATRIX* mNominate2)
 	if(isWW)
 	{
 		if(isHH)
-			if((boolList[4] || boolList[1]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ >= mNominate2->pBoxRow->PaleteSizeL))
+			if((boolList[4] || boolList[1]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ >= mNominate2->pBoxRow->PaleteSizeD))
 				return true;
 		if(isHL)
 			if((boolList[5] || boolList[0]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ  >= mNominate2->pBoxRow->PaleteSizeH))
@@ -877,7 +877,7 @@ bool COptimazedPacker::isLimitsChackes(MATRIX* mNominate2)
 	if(isWH)
 	{
 		if(isHW)
-			if((boolList[1] || boolList[4]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ  >= mNominate2->pBoxRow->PaleteSizeL))
+			if((boolList[1] || boolList[4]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ  >= mNominate2->pBoxRow->PaleteSizeD))
 				return true;
 		if(isHL)
 			if((boolList[2] || boolList[3]) && ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ  >= mNominate2->pBoxRow->PaleteSizeW))
@@ -912,9 +912,9 @@ bool COptimazedPacker::isAbleToPut(MATRIX* matrix)
 	temp[0][1] = matrix->pBoxRow->PaleteSizeW / m_pClosest->m_H;
 	temp[0][2] = matrix->pBoxRow->PaleteSizeW / ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ);
 
-	temp[1][0] = matrix->pBoxRow->PaleteSizeL / m_pClosest->m_W;
-	temp[1][1] = matrix->pBoxRow->PaleteSizeL / m_pClosest->m_H;
-	temp[1][2] = matrix->pBoxRow->PaleteSizeL / ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ);
+	temp[1][0] = matrix->pBoxRow->PaleteSizeD / m_pClosest->m_W;
+	temp[1][1] = matrix->pBoxRow->PaleteSizeD / m_pClosest->m_H;
+	temp[1][2] = matrix->pBoxRow->PaleteSizeD / ( m_pClosest->m_TopZ - m_pClosest->m_FloorZ);
 
 	temp[2][0] = matrix->pBoxRow->PaleteSizeH / m_pClosest->m_W;
 	temp[2][1] = matrix->pBoxRow->PaleteSizeH / m_pClosest->m_H;
@@ -944,7 +944,7 @@ bool COptimazedPacker::ChooseClosestAreaToCenter(bool isTopArea)
 	{
 		for (int i = 0 ; i< m_TopAreas.count() ; i++)
 		{
-			CArea* PArea = m_TopAreas.at(i);
+			__CArea* PArea = m_TopAreas.at(i);
 			distToCenter = pow(PArea->m_X,2)+pow(PArea->m_Y,2)+pow(PArea->m_FloorZ,2);
 			distToCenter = pow(distToCenter,0.5);
 
@@ -959,7 +959,7 @@ bool COptimazedPacker::ChooseClosestAreaToCenter(bool isTopArea)
 	{
 		for (int i = 0 ; i< m_FloorAreas.count() ; i++)
 		{
-			CArea* PArea = m_FloorAreas.at(i);
+			__CArea* PArea = m_FloorAreas.at(i);
 			distToCenter = pow(PArea->m_X,2)+pow(PArea->m_Y,2)+pow(PArea->m_FloorZ,2);
 			distToCenter = pow(distToCenter,0.5);
 
@@ -986,7 +986,7 @@ void COptimazedPacker::ClearAll()
 
 	while (m_FloorAreas.count()!=0)
 	{
-		CArea* temp = m_FloorAreas.takeFirst();
+		__CArea* temp = m_FloorAreas.takeFirst();
 		if(temp!=NULL)
 		{
 			delete temp;
@@ -995,7 +995,7 @@ void COptimazedPacker::ClearAll()
 	}
 	while (m_TopAreas.count()!=0)
 	{
-		CArea* temp = m_TopAreas.takeFirst();
+		__CArea* temp = m_TopAreas.takeFirst();
 		if(temp!=NULL)
 		{
 			delete temp;
@@ -1087,7 +1087,7 @@ bool COptimazedPacker::isInList(bool isAllTopArea)
 	{
 		for(int i = 0 ; i < m_ALLTopAreas.count() ; i++)
 		{
-			CArea* temp = m_ALLTopAreas.at(i);
+			__CArea* temp = m_ALLTopAreas.at(i);
 			if(temp->isEqual( m_pClosest))
 				return true;
 		}
@@ -1096,7 +1096,7 @@ bool COptimazedPacker::isInList(bool isAllTopArea)
 	{
 		for(int i = 0 ; i < m_ALLFloorAreas.count() ; i++)
 		{
-			CArea* temp = m_ALLFloorAreas.at(i);
+			__CArea* temp = m_ALLFloorAreas.at(i);
 			if(temp->isEqual( m_pClosest))
 				return true;
 		}
@@ -1110,7 +1110,7 @@ void COptimazedPacker::updateAllAreas()
 {
 	while (!m_TopAreas.isEmpty())
 	{
-		CArea* Temp = m_TopAreas.takeFirst();
+		__CArea* Temp = m_TopAreas.takeFirst();
 		m_pClosest = Temp;
 		if(!isInList(true))
 			m_ALLTopAreas.append(Temp);
@@ -1118,7 +1118,7 @@ void COptimazedPacker::updateAllAreas()
 
 	while (!m_FloorAreas.isEmpty())
 	{
-		CArea* Temp = m_FloorAreas.takeFirst();
+		__CArea* Temp = m_FloorAreas.takeFirst();
 		m_pClosest = Temp;
 		if(!isInList(false))
 			m_ALLFloorAreas.append(Temp);
@@ -1141,11 +1141,11 @@ void COptimazedPacker::buildMatrix()
 		__BoxRow* pBoxRow = m_UnAssignedBoxes.at(i);
 		MATRIX* pMatrix = new MATRIX();
 		pMatrix->cMatrix[0][0] =  pBoxRow->PaleteSizeW / m_pClosest->m_W;
-		pMatrix->cMatrix[0][1] =  pBoxRow->PaleteSizeL / m_pClosest->m_W;
+		pMatrix->cMatrix[0][1] =  pBoxRow->PaleteSizeD / m_pClosest->m_W;
 		pMatrix->cMatrix[0][2] =  pBoxRow->PaleteSizeH / m_pClosest->m_W;
 
 		pMatrix->cMatrix[1][0] =  pBoxRow->PaleteSizeW / m_pClosest->m_H;
-		pMatrix->cMatrix[1][1] =  pBoxRow->PaleteSizeL / m_pClosest->m_H;
+		pMatrix->cMatrix[1][1] =  pBoxRow->PaleteSizeD / m_pClosest->m_H;
 		pMatrix->cMatrix[1][2] =  pBoxRow->PaleteSizeH / m_pClosest->m_H;
 
 		pMatrix->pBoxRow  = new __BoxRow();
@@ -1288,11 +1288,11 @@ void COptimazedPacker::buildMatrixAnyway()
 		__BoxRow* pBoxRow = m_UnAssignedBoxes.at(i);
 		MATRIX* pMatrix = new MATRIX();
 		pMatrix->cMatrix[0][0] =  pBoxRow->PaleteSizeW / m_pClosest->m_W;
-		pMatrix->cMatrix[0][1] =  pBoxRow->PaleteSizeL / m_pClosest->m_W;
+		pMatrix->cMatrix[0][1] =  pBoxRow->PaleteSizeD / m_pClosest->m_W;
 		pMatrix->cMatrix[0][2] =  pBoxRow->PaleteSizeH / m_pClosest->m_W;
 
 		pMatrix->cMatrix[1][0] =  pBoxRow->PaleteSizeW / m_pClosest->m_H;
-		pMatrix->cMatrix[1][1] =  pBoxRow->PaleteSizeL / m_pClosest->m_H;
+		pMatrix->cMatrix[1][1] =  pBoxRow->PaleteSizeD / m_pClosest->m_H;
 		pMatrix->cMatrix[1][2] =  pBoxRow->PaleteSizeH / m_pClosest->m_H;
 
 		pMatrix->pBoxRow = new __BoxRow();
@@ -1500,14 +1500,14 @@ bool COptimazedPacker::buildNominate()
 #pragma endregion
 
 #pragma region "bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)"
-bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)
+bool COptimazedPacker::MergeArea(__CArea* area, bool isTopArea)
 {
     return false;
 	if(!isTopArea)
 	{
 		for(int i = 0; i < m_FloorAreas.count() ; i++)
 		{
-			CArea* temp = m_FloorAreas.at(i);
+			__CArea* temp = m_FloorAreas.at(i);
 			if(temp->m_FloorZ == area->m_FloorZ)
 			{
 				if(temp->m_Y == area->m_Y)
@@ -1555,7 +1555,7 @@ bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)
 	{
 		for(int i = 0; i < m_TopAreas.count() ; i++)
 		{
-			CArea* temp = m_TopAreas.at(i);
+			__CArea* temp = m_TopAreas.at(i);
 			if(temp->m_FloorZ == area->m_FloorZ)
 			{
 				if(temp->m_Y == area->m_Y)

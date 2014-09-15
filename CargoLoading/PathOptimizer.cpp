@@ -40,12 +40,12 @@ bool CPathOptimizer::Compute(QString & OutputMessage)
 	while (m_OrderList.count() != 0)
 	{
 		__Order* Temp = m_OrderList.takeFirst();
-		Temp->Provider = GetProvider(Temp->ProviderID);
-		if(Temp->count != 0 && Temp->Provider)
+		Temp->pProvider = GetProvider(Temp->ProviderID);
+		if(Temp->count != 0 && Temp->pProvider)
 		{
 			Node* m_Node = new Node();
-			m_Node->m_phi = Temp->Provider->phi;
-			m_Node->m_landa = Temp->Provider->landa;
+			m_Node->m_phi = Temp->pProvider->phi;
+			m_Node->m_landa = Temp->pProvider->landa;
 			m_Node->m_Dist = CalculateDistanse(Center , m_Node);
 			m_Node->m_Order = Temp;
 
@@ -143,7 +143,7 @@ __Carrier* CPathOptimizer::putInContainer(__Carrier* Carrier,Node* node)
 
 	if(pCarrier->m_FloorAreas.count() == 0 && pCarrier->m_TopAreas.count() == 0)
 	{
-		CArea* pTotalFloor = new CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
+		__CArea* pTotalFloor = new __CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
 		pCarrier->m_FloorAreas.append(pTotalFloor);
 	}
 
@@ -206,7 +206,7 @@ __Carrier* CPathOptimizer::putAllInContainer(__Carrier* Carrier,QList<Node*> nod
 
 	if(pCarrier->m_FloorAreas.count() == 0 && pCarrier->m_TopAreas.count() == 0)
 	{
-		CArea* pTotalFloor = new CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
+		__CArea* pTotalFloor = new __CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
 		pCarrier->m_FloorAreas.append(pTotalFloor);
 	}
 
@@ -325,7 +325,7 @@ bool CPathOptimizer::isOverLoad(__Carrier* Carrier,Node* node)
 
 	if(pCarrier->m_FloorAreas.count() == 0 && pCarrier->m_TopAreas.count() == 0)
 	{
-		CArea* pTotalFloor = new CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
+		__CArea* pTotalFloor = new __CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
 		pCarrier->m_FloorAreas.append(pTotalFloor);
 	}
 
@@ -386,7 +386,7 @@ void CPathOptimizer::checkOverLoad(Node* node)
 
 	if(pCarrier->m_FloorAreas.count() == 0 && pCarrier->m_TopAreas.count() == 0)
 	{
-		CArea* pTotalFloor = new CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
+		__CArea* pTotalFloor = new __CArea(pCarrier->Width,pCarrier->Depth,0,0,0,pCarrier->Height , pCarrier->MaxLoad);
 		pCarrier->m_FloorAreas.append(pTotalFloor);
 	}
 

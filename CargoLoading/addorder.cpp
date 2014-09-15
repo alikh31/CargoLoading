@@ -62,7 +62,7 @@ void AddOrder::onClickedAccept()
 	}
 
 
-	temp->Provider = m_pMainWindow->m_pProject->GetProviderByName(lineEdit_5->displayText());
+	temp->pProvider = m_pMainWindow->m_pProject->GetProviderByName(lineEdit_5->displayText());
 
 	temp->ProviderID = m_pMainWindow->m_pProject->GetProviderByName(lineEdit_5->displayText())->id;
 
