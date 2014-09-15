@@ -20,10 +20,7 @@ INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug \
     ../../../../Qt/Qt5.3.1/5.3/msvc2012_opengl/include/QtOpenGL
-LIBS += -lglu32 \
-    -lopengl32 \
-    -lgdi32 \
-    -luser32
+
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
