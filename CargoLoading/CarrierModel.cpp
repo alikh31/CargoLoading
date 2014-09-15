@@ -107,7 +107,7 @@ QVariant CCarrierModel::data(const QModelIndex &index, int role) const
 		case 5:
 			return rowData->MaxLoad;
 		case 6:
-			return rowData->CostPerKm;
+            return (int)rowData->CostPerKm;
 		case 7:
 			return rowData->VahicleType;
 		}

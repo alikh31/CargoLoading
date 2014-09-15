@@ -10,6 +10,8 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
+build-debug/
+build-release/
 x64/
 x86/
 build/
