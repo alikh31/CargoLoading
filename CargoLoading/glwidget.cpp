@@ -143,6 +143,9 @@ void GLWidget::paintGL(){
             float W = path->m_Carrier->Width  / (norm * .9f);
             float H = path->m_Carrier->Height / (norm * .9f);
             float D = path->m_Carrier->Depth  / (norm * .9f);
+            W*=.9f;
+            H*=.9f;
+            D*=.9f;
 
             glTranslatef(-W/2,-H/2,-D/2);
 
@@ -163,7 +166,7 @@ void GLWidget::paintGL(){
             drawCube(0,H,0,scaleFactor,scaleFactor,D,0,0,1);
             drawCube(W,H,0,scaleFactor,scaleFactor,D,0,0,1);
 
-            drawCube(-scaleFactor,-scaleFactor,-scaleFactor,W,scaleFactor,D,0,0,0.4f);
+            drawCube(-scaleFactor,-2*scaleFactor,-scaleFactor,W,scaleFactor,D,0,0,0.4f);
 
             for (int j = 0; j < path->m_Carrier->m_BoxList.size() ; j++)
             {
@@ -212,7 +215,7 @@ void GLWidget::wheelEvent(QWheelEvent *e)
 
 void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b)
 {
-    float t = 0.8f;
+    float t = 0.4f;
 
     w *= .5f;
     h *= .5f;

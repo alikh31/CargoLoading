@@ -205,7 +205,6 @@ void CGUIMainWindow::OpenProject()
 
 		}
 	}
-    m_pGLWidget->m_pProject = m_pProject;
 	return;
 }
 
@@ -269,6 +268,7 @@ void CGUIMainWindow::UpdateAll()
 
 void CGUIMainWindow::Compute()
 {
+    m_pGLWidget->m_pProject = m_pProject;
 	m_pProject->Compute();
 	m_pPlanTree->CreateBody();
 }
