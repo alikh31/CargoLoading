@@ -1,27 +1,19 @@
-
-#pragma region "Includes"
 #include "ProviderModel.h"
 #include "GUIMainWindow.h"
 
 
-#pragma endregion
 
-#pragma region "Constructor"
 CProviderModel::CProviderModel(CGUIMainWindow* pMainWindow)
 : QAbstractTableModel()
 {
 	m_pMainWindow=pMainWindow;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CProviderModel::~CProviderModel()
 {
 
 }
-#pragma endregion
 
-#pragma region "int CProviderModel::rowCount(const QModelIndex & ) const "
 int CProviderModel::rowCount(const QModelIndex & ) const 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -29,23 +21,17 @@ int CProviderModel::rowCount(const QModelIndex & ) const
 	int count=m_pMainWindow->m_pProject->m_ProviderList.count();
 	return count;
 }
-#pragma endregion
 
-#pragma region "int CProviderModel::columnCount(const QModelIndex & ) const "
 int CProviderModel::columnCount(const QModelIndex & ) const 
 {
 	return 5;
 }
-#pragma endregion
 
-#pragma region "void CProviderModel::RefreshList()"
 void CProviderModel::RefreshList()
 {
 	endResetModel();
 }
-#pragma endregion
 
-#pragma region "QVariant CProviderModel::data(const QModelIndex &index, int role) const "
 QVariant CProviderModel::data(const QModelIndex &index, int role) const 
 {
 
@@ -109,9 +95,7 @@ QVariant CProviderModel::data(const QModelIndex &index, int role) const
 	}
 	return QVariant();
 }
-#pragma endregion
 
-#pragma region "bool CProviderModel::setData(const QModelIndex &index, const QVariant &value, int role) "
 bool CProviderModel::setData(const QModelIndex &index, const QVariant &value, int role) 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -165,9 +149,7 @@ bool CProviderModel::setData(const QModelIndex &index, const QVariant &value, in
 	}
 	return false;
 }
-#pragma endregion
 
-#pragma region "Qt::ItemFlags CProviderModel::flags(const QModelIndex &index) const "
 Qt::ItemFlags CProviderModel::flags(const QModelIndex &index) const 
 {
 	if (!index.isValid()) return Qt::ItemIsEnabled;
@@ -176,9 +158,7 @@ Qt::ItemFlags CProviderModel::flags(const QModelIndex &index) const
 	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 
 }
-#pragma endregion
 
-#pragma region "QVariant CProviderModel::headerData(int section, Qt::Orientation orientation, int role) const  "
 QVariant CProviderModel::headerData(int section, Qt::Orientation orientation, int role) const  
 {
 	if (role != Qt::DisplayRole) return QVariant();
@@ -206,5 +186,4 @@ QVariant CProviderModel::headerData(int section, Qt::Orientation orientation, in
 	}
 	return "";
 }
-#pragma endregion
 

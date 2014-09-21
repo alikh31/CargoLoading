@@ -1,12 +1,9 @@
-#pragma region "Includes"
 #include "CarrierWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 //#include <QSpacerItem >
 #include "addcarrier.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CCarrierWidget::CCarrierWidget(QString title , QWidget *parent,CGUIMainWindow* pMainWindow)
 	: QDockWidget(title , parent)
 {   m_pMainWindow = pMainWindow;
@@ -39,16 +36,12 @@ CCarrierWidget::CCarrierWidget(QString title , QWidget *parent,CGUIMainWindow* p
 
 	pMainWindow->m_fFirstTime = true;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCarrierWidget::~CCarrierWidget()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CCarrierWidget::SetupButton(QString Text,QPushButton* pButton,QString iconPath)"
 void CCarrierWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pLayout)
 {
 	pButton->setText(Text);
@@ -57,9 +50,7 @@ void CCarrierWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* 
 	pLayout->addWidget(pButton);
 
 }
-#pragma endregion
 
-#pragma region "void CCarrierWidget::OnAddNewRow()"
 void CCarrierWidget::OnAddNewRow(bool bOk)
 {
 	Addcarrier* pAddcarrier = new Addcarrier(0, m_pMainWindow);
@@ -67,11 +58,8 @@ void CCarrierWidget::OnAddNewRow(bool bOk)
 	m_pTable->AddNewRowEvent();
     
 }
-#pragma endregion
 
-#pragma region "void CCarrierWidget::OnClearAllRows()"
 void CCarrierWidget::OnClearAllRows(bool bOk)
 {
 
 }
-#pragma endregion

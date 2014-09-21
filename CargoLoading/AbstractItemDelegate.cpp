@@ -1,12 +1,8 @@
-#pragma region "Includes"
 #include <QtGui>
 #include "AbstractItemDelegate.h"
 int				m_maximumWidth;
-#pragma endregion
 
 
-
-#pragma region "Constructor"
 CAbstractItemDelegate::CAbstractItemDelegate(QObject *parent)
     : QItemDelegate(parent)
 {
@@ -16,9 +12,7 @@ CAbstractItemDelegate::CAbstractItemDelegate(QObject *parent)
 	m_iBkColumn=1;
 	m_maximumWidth=0;
 }
-#pragma endregion
 
-#pragma region "Paint"
 void CAbstractItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
                           const QModelIndex &index) const
 {
@@ -44,9 +38,7 @@ void CAbstractItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     //                            2*radius, 2*radius));
     painter->restore();
 }
-#pragma endregion
 
-#pragma region "sizeHint"
 QSize CAbstractItemDelegate::sizeHint(const QStyleOptionViewItem &  option , const QModelIndex &  index ) const
 {
 	int col=index.column();
@@ -67,11 +59,8 @@ QSize CAbstractItemDelegate::sizeHint(const QStyleOptionViewItem &  option , con
 		return QSize(m_maximumWidth,m_ColumnH);
 	}
 }
-#pragma endregion
 
-#pragma region "void CAbstractItemDelegate::AddColumnWidth(int w)"
 void CAbstractItemDelegate::AddColumnWidth(int w)
 {
 	m_listColumnWidth.append(w);
 }
-#pragma endregion

@@ -1,6 +1,5 @@
 #include "OptimazedPacker.h"
 
-#pragma region"COptimazedPacker::COptimazedPacker(__Carrier* Carrier, QList<Node*> NodeList  , QList<__BoxRow*> CargoList)"
 COptimazedPacker::COptimazedPacker(__Carrier* Carrier, QList<Node*> NodeList  , QList<__BoxRow*> CargoList)
 {
 	m_Carrier = Carrier;
@@ -26,18 +25,14 @@ COptimazedPacker::COptimazedPacker(__Carrier* Carrier, QList<Node*> NodeList  , 
 	for (int i = 0; i < m_ListBoxPairs.count(); i++)
 		m_UnAssignedBoxes.append(m_ListBoxPairs.at(i)->pBox);
 }
-#pragma endregion
 
-#pragma region"COptimazedPacker::~COptimazedPacker(void)"
 COptimazedPacker::~COptimazedPacker(void)
 {
 	ClearAll();	
 
 	//delete m_pClosest;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::Compute(QString & OutputMessage )"
 bool COptimazedPacker::Compute(QString & OutputMessage)
 {
 	if(m_UnAssignedBoxes.count() == 0)
@@ -269,9 +264,7 @@ bool COptimazedPacker::Compute(QString & OutputMessage)
 
 	return false;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)"
 void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 {
 
@@ -479,9 +472,7 @@ void COptimazedPacker::putXYZinOrderList(MATRIX* matrix , bool isTopArea)
 	}
 
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::seperateFloorArea(MATRIX* matrix)"
 void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 {
 	double SArea = m_pClosest->m_H * m_pClosest->m_W;
@@ -621,9 +612,7 @@ void COptimazedPacker::seperateFloorArea(MATRIX* matrix)
 	}
 
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::seperateTopArea(MATRIX* matrix)"
 void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 {
 	double SArea = m_pClosest->m_H * m_pClosest->m_W;
@@ -758,9 +747,7 @@ void COptimazedPacker::seperateTopArea(MATRIX* matrix)
 	}
 
 }
-#pragma endregion
 
-#pragma region"bool COptimazedPacker::isLimitsChackes(MATRIX* mNominate2)"
 bool COptimazedPacker::isLimitsChackes(MATRIX* mNominate2)
 {
 	if( m_pClosest->m_MaxLoad < mNominate2->pBoxRow->PaleteWeight)
@@ -898,9 +885,7 @@ bool COptimazedPacker::isLimitsChackes(MATRIX* mNominate2)
 
 
 }
-#pragma endregion
 
-#pragma region"bool COptimazedPacker::isAbleToPut(MATRIX* matrix)"
 bool COptimazedPacker::isAbleToPut(MATRIX* matrix)
 {
 	if( m_pClosest->m_MaxLoad < matrix->pBoxRow->PaleteWeight)
@@ -930,9 +915,7 @@ bool COptimazedPacker::isAbleToPut(MATRIX* matrix)
 	return true;
 
 }
-#pragma endregion
 
-#pragma region"bool COptimazedPacker::ChooseClosestAreaToCenter(bool isTopArea)"
 bool COptimazedPacker::ChooseClosestAreaToCenter(bool isTopArea)
 {
 	double distToCenter = 1.79769e+308;
@@ -977,9 +960,7 @@ bool COptimazedPacker::ChooseClosestAreaToCenter(bool isTopArea)
 
 	return true;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::ClearAll()"
 void COptimazedPacker::ClearAll()
 {
 	ClearMatrixs();
@@ -1015,9 +996,7 @@ void COptimazedPacker::ClearAll()
 
 
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::ClearMatrixs()"
 void COptimazedPacker::ClearMatrixs()
 {
 
@@ -1054,9 +1033,7 @@ void COptimazedPacker::ClearMatrixs()
 		}
 	}
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::addBoxRow(__BoxRow* BoxRow)"
 void COptimazedPacker::addBoxRow(__BoxRow* BoxRow)
 {
 	BOX_PAIR* pBoxPair = new BOX_PAIR;
@@ -1065,9 +1042,7 @@ void COptimazedPacker::addBoxRow(__BoxRow* BoxRow)
 
 	m_ListBoxPairs.append(pBoxPair);
 }
-#pragma endregion
 
-#pragma region "__BoxRow* COptimazedPacker::GetBox(int id)" 
 __BoxRow* COptimazedPacker::GetBox(int id)
 {
 	for(int i=0;i<m_CargoList.count();i++)
@@ -1078,9 +1053,7 @@ __BoxRow* COptimazedPacker::GetBox(int id)
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region "bool COptimazedPacker::isInList(bool isAllTopArea)" 
 bool COptimazedPacker::isInList(bool isAllTopArea)
 {
 	if(isAllTopArea)
@@ -1103,9 +1076,7 @@ bool COptimazedPacker::isInList(bool isAllTopArea)
 	}
 	return false;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::updateAllAreas()"
 void COptimazedPacker::updateAllAreas()
 {
 	while (!m_TopAreas.isEmpty())
@@ -1125,9 +1096,7 @@ void COptimazedPacker::updateAllAreas()
 	}
 
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::buildMatrix()"
 void COptimazedPacker::buildMatrix()
 {
 	double mMax = 0;
@@ -1276,9 +1245,7 @@ void COptimazedPacker::buildMatrix()
 
 	return;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::buildMatrixAnyway()"
 void COptimazedPacker::buildMatrixAnyway()
 {
 	QList<MATRIX*> mMatrix;
@@ -1373,9 +1340,7 @@ void COptimazedPacker::buildMatrixAnyway()
 
 	return;
 }
-#pragma endregion
 
-#pragma region"void COptimazedPacker::buildNominate()"
 bool COptimazedPacker::buildNominate()
 {
 	for(int i = 0; i < mNominate.count(); i++)
@@ -1497,9 +1462,7 @@ bool COptimazedPacker::buildNominate()
 
 	return false;
 }
-#pragma endregion
 
-#pragma region "bool COptimazedPacker::MergeArea(CArea* area, bool isTopArea)"
 bool COptimazedPacker::MergeArea(__CArea* area, bool isTopArea)
 {
     return false;
@@ -1600,4 +1563,3 @@ bool COptimazedPacker::MergeArea(__CArea* area, bool isTopArea)
 	}
 	return false;
 }
-#pragma endregion

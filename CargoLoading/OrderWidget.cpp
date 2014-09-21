@@ -1,4 +1,3 @@
-#pragma region "Includes"
 #include "OrderWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -7,9 +6,7 @@
 #include "addorder.h"
 #include <QMessageBox>
 //#include "NetworkWidget.h"
-#pragma endregion
 
-#pragma region "Constructor"
 COrderWidget::COrderWidget(QString title , QWidget *parent,CGUIMainWindow* pMainWindow)
 : QDockWidget(title , parent)
 {
@@ -43,16 +40,12 @@ COrderWidget::COrderWidget(QString title , QWidget *parent,CGUIMainWindow* pMain
 
 	m_pMainWindow->m_fFirstTime = true;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 COrderWidget::~COrderWidget()
 {
 
 }
-#pragma endregion
 
-#pragma region "void COrderWidget::SetupButton(QString Text,QPushButton* pButton,QString iconPath)"
 void COrderWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pLayout)
 {
 	pButton->setText(Text);
@@ -61,9 +54,7 @@ void COrderWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pL
 	pLayout->addWidget(pButton);
 
 }
-#pragma endregion
 
-#pragma region "void COrderWidget::OnAddNewRow()"
 void COrderWidget::OnAddNewRow(bool bOk)
 {
 	AddOrder* pAddOrder = new AddOrder(NULL,m_pMainWindow);
@@ -73,19 +64,14 @@ void COrderWidget::OnAddNewRow(bool bOk)
 	m_pTable->AddNewRowEvent();
 
 }
-#pragma endregion
 
-#pragma region "void COrderWidget::OnClearAllRows()"
 void COrderWidget::OnClearAllRows(bool bOk)
 {
 
 }
-#pragma endregion
 
-#pragma region "void COrderWidget::OnCompute(bool bOk)"
 void COrderWidget::OnCompute(bool bOk)
 {
 	m_pMainWindow->m_pProject->Compute();
 	m_pMainWindow->m_pPlanTree->CreateBody();
 }
-#pragma endregion

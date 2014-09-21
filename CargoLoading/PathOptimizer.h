@@ -1,4 +1,3 @@
-#pragma once
 #include <qlist.h>
 #include <QStringList.h>
 #include <math.h>

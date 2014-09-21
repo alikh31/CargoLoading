@@ -1,10 +1,7 @@
-#pragma region "Includes"
 #include "OrderTable.h"
 #include "GUIMainWindow.h"
 #include "OrderWidget.h"
-#pragma endregion
 
-#pragma region "Constructor"
 COrderTable::COrderTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 : QTableView(parent)
 {
@@ -21,16 +18,12 @@ COrderTable::COrderTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	SetupActions();
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 COrderTable::~COrderTable()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CImageTable::SetupActions()"
 void COrderTable::SetupActions()
 {
 	m_pMenu=new QMenu();
@@ -43,9 +36,7 @@ void COrderTable::SetupActions()
 	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
-#pragma endregion
 
-#pragma region "void COrderTable::AddNewRowEvent( )"
 void COrderTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewOrder();
@@ -55,9 +46,7 @@ void COrderTable::AddNewRowEvent( )
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void COrderTable::DeleteEvent( )"
 void COrderTable::DeleteEvent( )
 {
 	int row;
@@ -79,9 +68,7 @@ void COrderTable::DeleteEvent( )
 	}
 	ReLoadModel();
 }
-#pragma endregion
 
-#pragma region "void COrderTable::RequestForContextMenuEvent	( const QPoint& point)"
 void COrderTable::RequestForContextMenuEvent	( const QPoint& point)
 {
 	int test=10;
@@ -92,9 +79,7 @@ void COrderTable::RequestForContextMenuEvent	( const QPoint& point)
 	if(m_SelectedIndexes.count()>0)
 		m_pMenu->exec(pnt);
 }
-#pragma endregion
 
-#pragma region "QModelIndexList COrderTable::getSelectedRows()"
 QModelIndexList COrderTable::getSelectedRows()
 {
 	QModelIndexList lstIndex ;
@@ -109,9 +94,7 @@ QModelIndexList COrderTable::getSelectedRows()
 	}
 	return lstIndex;
 }
-#pragma endregion
 
-#pragma region "void COrderTable::ReLoadModel()"
 void COrderTable::ReLoadModel()
 {
 	return m_pModel->RefreshList();
@@ -121,4 +104,3 @@ void COrderTable::ReLoadModel()
 	m_pModel=new COrderModel(m_pMainWindow);
 	setModel(m_pSortModel);
 }
-#pragma endregion

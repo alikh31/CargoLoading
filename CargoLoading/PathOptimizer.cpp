@@ -1,6 +1,5 @@
 #include "PathOptimizer.h"
 
-#pragma region"CPathOptimizer::CPathOptimizer(QList<__Carrier*>CarrierList, QList<__Order*> OrderList , QList<__BoxRow*> CargoList)"
 CPathOptimizer::CPathOptimizer(QList<__Carrier*>CarrierList, QList<__Order*> OrderList , QList<__BoxRow*> CargoList ,QList<__Provider*> ProviderList,double phi,double landa , bool modeFlag)
 {
 	m_CarrierList = CarrierList;
@@ -14,15 +13,11 @@ CPathOptimizer::CPathOptimizer(QList<__Carrier*>CarrierList, QList<__Order*> Ord
 
 	m_fMode = modeFlag;
 }
-#pragma endregion
 
-#pragma region"COptimazedPacker::~COptimazedPacker(void)"
 CPathOptimizer::~CPathOptimizer(void)
 {
 }
-#pragma endregion
 
-#pragma region"bool CPathOptimizer::Compute(QString & OutputMessage)"
 bool CPathOptimizer::Compute(QString & OutputMessage)
 {
 	m_minTime = 0;
@@ -134,9 +129,7 @@ bool CPathOptimizer::Compute(QString & OutputMessage)
 
 	return false;
 }
-#pragma endregion
 
-#pragma region"__Carrier CPathOptimizer::putInContainer(__Carrier Carrier,Node* node)"
 __Carrier* CPathOptimizer::putInContainer(__Carrier* Carrier,Node* node)
 {
 	__Carrier* pCarrier = new __Carrier(*Carrier);
@@ -194,9 +187,7 @@ __Carrier* CPathOptimizer::putInContainer(__Carrier* Carrier,Node* node)
 
 	return Carrier;
 }
-#pragma endregion
 
-#pragma region"__Carrier CPathOptimizer::putAllInContainer(__Carrier* Carrier,QList<Node*> node)"
 __Carrier* CPathOptimizer::putAllInContainer(__Carrier* Carrier,QList<Node*> node)
 {
 	__Carrier* pCarrier = new __Carrier(*Carrier);
@@ -270,9 +261,7 @@ __Carrier* CPathOptimizer::putAllInContainer(__Carrier* Carrier,QList<Node*> nod
 
 	return Carrier;
 }
-#pragma endregion
 
-#pragma region"bool CPathOptimizer::checkTimeLimit(Node node)"
 bool CPathOptimizer::checkTimeLimit(Node *node)
 {
 	int minTime = node->m_Order->minTime;
@@ -316,9 +305,7 @@ bool CPathOptimizer::checkTimeLimit(Node *node)
 
 	return false;
 }
-#pragma endregion
 
-#pragma region"bool CPathOptimizer::isOverLoad(__Carrier Carrier,Node* node)"
 bool CPathOptimizer::isOverLoad(__Carrier* Carrier,Node* node)
 {
 	__Carrier* pCarrier = new __Carrier(*Carrier);
@@ -377,9 +364,7 @@ bool CPathOptimizer::isOverLoad(__Carrier* Carrier,Node* node)
 	}
 	return true;
 }
-#pragma endregion
 
-#pragma region"void CPathOptimizer::checkOverLoad(Node* node)"
 void CPathOptimizer::checkOverLoad(Node* node)
 {
 	__Carrier* pCarrier = new __Carrier(*m_Carrier);
@@ -440,9 +425,7 @@ void CPathOptimizer::checkOverLoad(Node* node)
 	}
 	checkOverLoad(TEMP);
 }
-#pragma endregion
 
-#pragma region"Node* CPathOptimizer::findMinDist()"
 Node* CPathOptimizer::findMinDist()
 {
 	double min = 1.79769e+308;
@@ -461,9 +444,7 @@ Node* CPathOptimizer::findMinDist()
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region"double CPathOptimizer::CalculateDistanse(double phi1,double landa1,double phi2,double landa2)"
 //double CPathOptimizer::CalculateDistanse(double phi1,double landa1,double phi2,double landa2)
 //{
 //	double dDistance = 0;
@@ -489,23 +470,17 @@ Node* CPathOptimizer::findMinDist()
 //
 //	return dDistance;
 //}
-#pragma endregion
 
-#pragma region"double CPathOptimizer::CalculateDistanse(double x1,double y1,double x2,double y2)"
 double CPathOptimizer::CalculateDistanse(double x1,double y1,double x2,double y2)
 {
 	return pow((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2),0.5);
 }
-#pragma endregion
 
-#pragma region"double CPathOptimizer::CalculateDistanse(Node node1,Node node2)"
 double CPathOptimizer::CalculateDistanse(Node* node1,Node* node2)
 {
 	return CalculateDistanse(node1->m_phi,node1->m_landa,node2->m_phi,node2->m_landa);
 }
-#pragma endregion
 
-#pragma region "__Provider* CPathOptimizer::GetProvider(int id)"
 __Provider* CPathOptimizer::GetProvider(int id)
 {
 	for(int i=0;i<m_ProviderList.count();i++)
@@ -516,9 +491,7 @@ __Provider* CPathOptimizer::GetProvider(int id)
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region "void CPathOptimizer::Optimization()"
 void CPathOptimizer::Optimization()
 {
 	for(int i = 0 ; i < m_AllPathes.count() ; i++)
@@ -585,9 +558,7 @@ void CPathOptimizer::Optimization()
 
 	}
 }
-#pragma endregion
 
-#pragma region "bool CPathOptimizer::isWorthChange(Path* path1 ,Node* node1 ,Path* path2 ,Node* node2)"
 bool CPathOptimizer::isWorthChange(Path* path1 ,Node* node1 ,Path* path2 ,Node* node2)
 {
 	double firstPenaltyCost1 = path1->m_PenaltyCost;
@@ -621,9 +592,7 @@ bool CPathOptimizer::isWorthChange(Path* path1 ,Node* node1 ,Path* path2 ,Node* 
 
 	return true;
 }
-#pragma endregion
 
-#pragma region "bool CPathOptimizer::isWorthReArange(Path* path1 ,Node* node1 ,Node* node2)"
 bool CPathOptimizer::isWorthReArange(Path* path ,Node* node1 ,Node* node2)
 {
 	double firstPenaltyCost1 = path->m_PenaltyCost;
@@ -709,9 +678,7 @@ bool CPathOptimizer::isWorthReArange(Path* path ,Node* node1 ,Node* node2)
 
 	return true;
 }
-#pragma endregion
 
-#pragma region"bool CPathOptimizer::replaceNode(Path* path ,Node* node )"
 bool CPathOptimizer::replaceNode(Path* path ,Node* node )
 {
 	__Carrier* Carrier = new __Carrier(*m_Carrier);
@@ -845,9 +812,7 @@ bool CPathOptimizer::replaceNode(Path* path ,Node* node )
 
 	return true;
 }
-#pragma endregion
 
-#pragma region"bool CPathOptimizer::MaxOptimization(Path* path ,Node* node )"
 bool CPathOptimizer::MaxOptimization(Path* path ,Node* node )
 {
 	__Carrier* Carrier = new __Carrier(*m_Carrier);
@@ -953,9 +918,7 @@ bool CPathOptimizer::MaxOptimization(Path* path ,Node* node )
 	
 	return true;
 }
-#pragma endregion
 
-#pragma region"void CPathOptimizer::fillAllPath()"
 void CPathOptimizer::fillAllPath()
 {
 	for(int i = 0 ; i < m_AllPathes.count() ; i++)
@@ -1018,9 +981,7 @@ void CPathOptimizer::fillAllPath()
 		
 	}
 }
-#pragma endregion
 
-#pragma region"void CPathOptimizer::ReArange()"
 void CPathOptimizer::ReArange()
 {
 	for(int i = 0 ; i < m_AllPathes.count() ; i++)
@@ -1070,9 +1031,7 @@ void CPathOptimizer::ReArange()
 
 	}
 }
-#pragma endregion
 
-#pragma region "bool CPathOptimizer::isAbleToRemove(Path* path1 ,Path* path2 ,Node* node2)"
 bool CPathOptimizer::isAbleToRemove(Path* path1 ,Path* path2 ,Node* node2)
 {
 	double firstPenaltyCost1 = path1->m_PenaltyCost;
@@ -1097,9 +1056,7 @@ bool CPathOptimizer::isAbleToRemove(Path* path1 ,Path* path2 ,Node* node2)
 
 	return true;
 }
-#pragma endregion
 
-#pragma region "__Carrier*	CPathOptimizer::GetBigestCarrier()"
 __Carrier*	CPathOptimizer::GetBigestCarrier()
 {
 	double v = 0;
@@ -1127,9 +1084,7 @@ __Carrier*	CPathOptimizer::GetBigestCarrier()
 
 	return NULL;
 }
-#pragma endregion
 
-#pragma region "void CPathOptimizer::OptimizeCarrier()"
 void CPathOptimizer::OptimizeCarrier()
 {
 	for(int j= 0 ; j < m_CarrierList.count() ; j++)
@@ -1168,9 +1123,7 @@ void CPathOptimizer::OptimizeCarrier()
 	}
 	
 }
-#pragma endregion
 
-#pragma region "bool CPathOptimizer::isAbleToChangeCarrier(Path* path1 ,__Carrier* Carrier)"
 bool CPathOptimizer::isAbleToChangeCarrier(Path* path1 ,__Carrier* Carrier)
 {
 	double firstPenaltyCost1 = path1->m_PenaltyCost;
@@ -1193,4 +1146,3 @@ bool CPathOptimizer::isAbleToChangeCarrier(Path* path1 ,__Carrier* Carrier)
 
 	return false;
 }
-#pragma endregion

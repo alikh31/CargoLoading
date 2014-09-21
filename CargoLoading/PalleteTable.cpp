@@ -1,9 +1,6 @@
-#pragma region "Includes"
 #include "PalleteTable.h"
 #include "GUIMainWindow.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CPalleteTable::CPalleteTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 : QTableView(parent)
 {
@@ -19,16 +16,12 @@ CPalleteTable::CPalleteTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	SetupActions();
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CPalleteTable::~CPalleteTable()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CImageTable::SetupActions()"
 void CPalleteTable::SetupActions()
 {
 	m_pMenu=new QMenu();
@@ -41,25 +34,19 @@ void CPalleteTable::SetupActions()
 	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
-#pragma endregion
 
-#pragma region "void CPalleteTable::AddNewRowEvent( )"
 void CPalleteTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewPallete();
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void CPalleteTable::DeleteEvent( )"
 void CPalleteTable::DeleteEvent( )
 {
 
 }
-#pragma endregion
 
-#pragma region "void CPalleteTable::RequestForContextMenuEvent	( const QPoint& point)"
 void CPalleteTable::RequestForContextMenuEvent	( const QPoint& point)
 {
 	int test=10;
@@ -70,9 +57,7 @@ void CPalleteTable::RequestForContextMenuEvent	( const QPoint& point)
 	if(m_SelectedIndexes.count()>0)
 		m_pMenu->exec(pnt);
 }
-#pragma endregion
 
-#pragma region "QModelIndexList CPalleteTable::getSelectedRows()"
 QModelIndexList CPalleteTable::getSelectedRows()
 {
 	QModelIndexList lstIndex ;
@@ -87,9 +72,7 @@ QModelIndexList CPalleteTable::getSelectedRows()
 	}
 	return lstIndex;
 }
-#pragma endregion
 
-#pragma region "void CPalleteTable::ReLoadModel()"
 void CPalleteTable::ReLoadModel()
 {
 	return m_pModel->RefreshList();
@@ -99,4 +82,3 @@ void CPalleteTable::ReLoadModel()
 	m_pModel=new CPalleteModel(m_pMainWindow);
 	setModel(m_pModel);
 }
-#pragma endregion

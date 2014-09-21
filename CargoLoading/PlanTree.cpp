@@ -1,5 +1,4 @@
-﻿#pragma region "includes"
-#include "PlanTree.h"
+﻿#include "PlanTree.h"
 //#include "PathOptimizer.h"
 #include "QTreeWidgetItem"
 #include "QStringList"
@@ -9,9 +8,7 @@
 #include <QFileDialog>
 #include <QIcon>
 #include "QSize"
-#pragma endregion
 
-#pragma region "CPlanTree::CPlanTree(QWidget *parent,CProject *Project)"
 CPlanTree::CPlanTree(QWidget *parent,CGUIMainWindow* pMainWindow,CProject *Project)
 :QTreeWidget(parent)
 {
@@ -22,16 +19,12 @@ CPlanTree::CPlanTree(QWidget *parent,CGUIMainWindow* pMainWindow,CProject *Proje
 	CreateActions();
 	
 }
-#pragma endregion
 
-#pragma region "CPlanTree::~CPlanTree()"
 CPlanTree::~CPlanTree()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OpenEditor()"
 void CPlanTree::OpenEditor(QTreeWidgetItem * item, int column )
 {
 	openPersistentEditor(item,column);
@@ -39,18 +32,13 @@ void CPlanTree::OpenEditor(QTreeWidgetItem * item, int column )
 	m_EditingColumnNo=column;
 	m_pEditingItem=item;
 }
-#pragma endregion
 
-/*╔════User Events═════════╗*/
-#pragma region "void CPlanTree::currentItemChangedEvent( QTreeWidgetItem * current, QTreeWidgetItem * previous )"
 void CPlanTree::currentItemChangedEvent( QTreeWidgetItem * current, QTreeWidgetItem * previous )
 {
 	
 
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::RequestForContextMenuEvent (const  QPoint & pos )"
 void CPlanTree::RequestForContextMenuEvent (const  QPoint & pos )
 {
 	QTreeWidgetItem * item = 0 ;
@@ -72,16 +60,12 @@ void CPlanTree::RequestForContextMenuEvent (const  QPoint & pos )
 		return;
 	}
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::itemDoubleClickedEvent ( QTreeWidgetItem * item, int column )"
 void CPlanTree::itemDoubleClickedEvent ( QTreeWidgetItem * item, int column ) 
 {
 	
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column ) "
 void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column ) 
 {
 	if(item->parent()){
@@ -93,9 +77,7 @@ void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column )
         m_pMainWindow->m_pGLWidget->update();
     }
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::itemChangedEvent ( QTreeWidgetItem * item, int column )"
 void CPlanTree::itemChangedEvent ( QTreeWidgetItem * item, int column )
 {
 	//close the editor
@@ -104,10 +86,8 @@ void CPlanTree::itemChangedEvent ( QTreeWidgetItem * item, int column )
 	m_EditingColumnNo=-1;
 	m_pEditingItem=NULL;
 }
-#pragma endregion
 
 
-#pragma region "void CPlanTree::Initialize()"
 void CPlanTree::Initialize()
 {
 	QStringList list;
@@ -123,9 +103,7 @@ void CPlanTree::Initialize()
 	connect( this, SIGNAL( itemChanged( QTreeWidgetItem *, int)),this, SLOT( itemChangedEvent ( QTreeWidgetItem *, int) ) );
 	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),this,SLOT(currentItemChangedEvent(QTreeWidgetItem *, QTreeWidgetItem *)));
 }
-#pragma endregion 
 
-#pragma region "void CPlanTree::CreateBody()"
 void CPlanTree::CreateBody()
 {
 	clear();
@@ -166,9 +144,7 @@ void CPlanTree::CreateBody()
 	//expandItem(m_pProcessingResultItem);
 
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::CreateActions()"
 void CPlanTree::CreateActions()
 {
 	m_pCollapseAct=new QAction("Collapse",this);
@@ -325,36 +301,23 @@ void CPlanTree::CreateActions()
 
 
 }
-#pragma endregion
-#pragma endregion
-/*╚════════════════════════╝*/
 
-/*╔════Custom Slots ═══════╗*/
-#pragma region "void CPlanTree::OnCollapse()"
 void CPlanTree::OnCollapse()
 {
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnExpand()"
 void CPlanTree::OnExpand()
 {
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnCollapseProj()"
 void CPlanTree::OnCollapseProj()
 {
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnExpandProj()"
 void CPlanTree::OnExpandProj()
 {
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnAddFrameArray()"
 void CPlanTree::OnChangeArangeMode()
 {
 	/*if(m_pSelectedPath)
@@ -375,23 +338,16 @@ void CPlanTree::OnChangeArangeMode()
 	}
 */
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnAddProjectionArray()"
 void CPlanTree::OnAddProjectionArray()
 {
 }
-#pragma endregion
 
-#pragma region "void CPlanTree::OnProjectSetting()"
 void CPlanTree::OnProjectSetting()
 {
 
 }
-#pragma endregion
-/*╚════════════════════════╝*/
 
-#pragma region "__BoxRow* CPlanTree::GetBox(int id)" 
 __BoxRow* CPlanTree::GetBox(int id)
 {
 	for(int i=0;i<m_pProject->m_CargoList.count();i++)
@@ -402,9 +358,7 @@ __BoxRow* CPlanTree::GetBox(int id)
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region "Path* CPlanTree::GetPath(int id)" 
 Path* CPlanTree::GetPath(int id)
 {
 	for(int i=0;i<m_pProject->m_AllPathes.count();i++)
@@ -415,4 +369,3 @@ Path* CPlanTree::GetPath(int id)
 	}
 	return NULL;
 }
-#pragma endregion

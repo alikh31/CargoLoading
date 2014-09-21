@@ -1,11 +1,8 @@
-#pragma region "Includes"
 #include "PalleteWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 //#include <QSpacerItem >
-#pragma endregion
 
-#pragma region "Constructor"
 CPalleteWidget::CPalleteWidget(QString title , QWidget *parent,CGUIMainWindow* pMainWindow)
 : QDockWidget(title , parent)
 {
@@ -37,16 +34,12 @@ CPalleteWidget::CPalleteWidget(QString title , QWidget *parent,CGUIMainWindow* p
 
 	pMainWindow->m_fFirstTime = true;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CPalleteWidget::~CPalleteWidget()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CPalleteWidget::SetupButton(QString Text,QPushButton* pButton,QString iconPath)"
 void CPalleteWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pLayout)
 {
 	pButton->setText(Text);
@@ -55,19 +48,14 @@ void CPalleteWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* 
 	pLayout->addWidget(pButton);
 
 }
-#pragma endregion
 
-#pragma region "void CPalleteWidget::OnAddNewRow()"
 void CPalleteWidget::OnAddNewRow(bool bOk)
 {
 	m_pTable->AddNewRowEvent();
 
 }
-#pragma endregion
 
-#pragma region "void CPalleteWidget::OnClearAllRows()"
 void CPalleteWidget::OnClearAllRows(bool bOk)
 {
 
 }
-#pragma endregion

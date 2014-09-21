@@ -1,4 +1,3 @@
-#pragma once
 #define INIT_BUFF_SIZE  10000
 #include "QString"
 

@@ -1,26 +1,19 @@
-#pragma region "Includes"
 #include "CarrierModel.h"
 #include "GUIMainWindow.h"
 
 
-#pragma endregion
 
-#pragma region "Constructor"
 CCarrierModel::CCarrierModel(CGUIMainWindow* pMainWindow)
 : QAbstractTableModel()
 {
 	m_pMainWindow=pMainWindow;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCarrierModel::~CCarrierModel()
 {
 
 }
-#pragma endregion
 
-#pragma region "int CCarrierModel::rowCount(const QModelIndex & ) const "
 int CCarrierModel::rowCount(const QModelIndex & ) const 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -28,23 +21,17 @@ int CCarrierModel::rowCount(const QModelIndex & ) const
 	int count=m_pMainWindow->m_pProject->m_CarrierList.count();
 	return count;
 }
-#pragma endregion
 
-#pragma region "int CCarrierModel::columnCount(const QModelIndex & ) const "
 int CCarrierModel::columnCount(const QModelIndex & ) const 
 {
 	return 8;
 }
-#pragma endregion
 
-#pragma region "void CCarrierModel::RefreshList()"
 void CCarrierModel::RefreshList()
 {
 	endResetModel();
 }
-#pragma endregion
 
-#pragma region "QVariant CCarrierModel::data(const QModelIndex &index, int role) const "
 QVariant CCarrierModel::data(const QModelIndex &index, int role) const 
 {
 
@@ -114,9 +101,7 @@ QVariant CCarrierModel::data(const QModelIndex &index, int role) const
 	}
 	return QVariant();
 }
-#pragma endregion
 
-#pragma region "bool CCarrierModel::setData(const QModelIndex &index, const QVariant &value, int role) "
 bool CCarrierModel::setData(const QModelIndex &index, const QVariant &value, int role) 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -197,9 +182,7 @@ bool CCarrierModel::setData(const QModelIndex &index, const QVariant &value, int
 	}
 	return false;
 }
-#pragma endregion
 
-#pragma region "Qt::ItemFlags CCarrierModel::flags(const QModelIndex &index) const "
 Qt::ItemFlags CCarrierModel::flags(const QModelIndex &index) const 
 {
 	if (!index.isValid()) return Qt::ItemIsEnabled;
@@ -208,9 +191,7 @@ Qt::ItemFlags CCarrierModel::flags(const QModelIndex &index) const
 	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 
 }
-#pragma endregion
 
-#pragma region "QVariant CCarrierModel::headerData(int section, Qt::Orientation orientation, int role) const  "
 QVariant CCarrierModel::headerData(int section, Qt::Orientation orientation, int role) const  
 {
 	if (role != Qt::DisplayRole) return QVariant();
@@ -244,5 +225,4 @@ QVariant CCarrierModel::headerData(int section, Qt::Orientation orientation, int
 	}
 	return "";
 }
-#pragma endregion
 

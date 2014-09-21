@@ -279,7 +279,6 @@ void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, fl
     glTranslatef(-(x+w),-(y+h),-(z+d));
 }
 
-#pragma region "Node*	GLWidget::getNode	(int NodeID)"
 Node*	GLWidget::getNode	(int NodeID)
 {
     if (!m_pProject)
@@ -299,9 +298,7 @@ Node*	GLWidget::getNode	(int NodeID)
     }
     return NULL;
 }
-#pragma endregion
 
-#pragma region "__BoxRow* GLWidget::GetBox(int id)" 
 __BoxRow* GLWidget::GetBox(int id)
 {
     if (!m_pProject)
@@ -316,4 +313,3 @@ __BoxRow* GLWidget::GetBox(int id)
     }
     return NULL;
 }
-#pragma endregion

@@ -1,11 +1,8 @@
-#pragma region "Includes"
 #include "CargoTable.h"
 #include "GUIMainWindow.h"
 #include "AbstractItemDelegate.h"
 #include "CargoWidget.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CCargoTable::CCargoTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	: QTableView(parent)
 {
@@ -39,16 +36,12 @@ CCargoTable::CCargoTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	resizeColumnsToContents();
 	resizeRowsToContents();
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCargoTable::~CCargoTable()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CImageTable::SetupActions()"
 void CCargoTable::SetupActions()
 {
 	m_pMenu=new QMenu();
@@ -61,9 +54,7 @@ void CCargoTable::SetupActions()
 	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
-#pragma endregion
 
-#pragma region "void CCargoTable::AddNewRowEvent( )"
 void CCargoTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewCargo();
@@ -71,9 +62,7 @@ void CCargoTable::AddNewRowEvent( )
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void CCargoTable::DeleteEvent( )"
 void CCargoTable::DeleteEvent( )
 {
 	int row;
@@ -96,9 +85,7 @@ void CCargoTable::DeleteEvent( )
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void CCargoTable::RequestForContextMenuEvent	( const QPoint& point)"
 void CCargoTable::RequestForContextMenuEvent	( const QPoint& point)
 {
 	int test=10;
@@ -109,9 +96,7 @@ void CCargoTable::RequestForContextMenuEvent	( const QPoint& point)
 	if(m_SelectedIndexes.count()>0)
 		m_pMenu->exec(pnt);
 }
-#pragma endregion
 
-#pragma region "QModelIndexList CCargoTable::getSelectedRows()"
 QModelIndexList CCargoTable::getSelectedRows()
 {
 	QModelIndexList lstIndex ;
@@ -126,9 +111,7 @@ QModelIndexList CCargoTable::getSelectedRows()
 	}
 	return lstIndex;
 }
-#pragma endregion
 
-#pragma region "void CCargoTable::ReLoadModel()"
 void CCargoTable::ReLoadModel()
 {
 	return m_pModel->RefreshList();
@@ -139,12 +122,9 @@ void CCargoTable::ReLoadModel()
 	setModel(m_pSortModel);
 	Update();
 }
-#pragma endregion
 
-#pragma region "void CCargoTable::Update()"
 void CCargoTable::Update()
 {
 	resizeColumnsToContents();
 	resizeRowsToContents();	
 }
-#pragma endregion

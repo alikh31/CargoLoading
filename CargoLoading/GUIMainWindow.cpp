@@ -1,4 +1,3 @@
-#pragma region "Includes"
 #include "GUIMainWindow.h"
 #include "CargoWidget.h"
 #include "ProviderWidget.h"
@@ -10,9 +9,7 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QSplitter>
-#pragma endregion
 
-#pragma region "Constructor"
 CGUIMainWindow::CGUIMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -28,16 +25,12 @@ CGUIMainWindow::CGUIMainWindow(QWidget *parent)
 	setupDockWidget();
     //setLayoutDirection(Qt::RightToLeft);
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CGUIMainWindow::~CGUIMainWindow()
 {
 	delete m_pProject;
 }
-#pragma endregion
 
-#pragma region "void CargoLoading::setupCentralWidget()"
 void CGUIMainWindow::setupCentralWidget()
 {
 	center = new QTabWidget (this);
@@ -100,9 +93,7 @@ void CGUIMainWindow::setupCentralWidget()
 
     return;
 }
-#pragma endregion
 
-#pragma region "void CargoLoading::setupDockWidget()"
 void CGUIMainWindow::setupDockWidget()
 {
 	/*QMainWindow::setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
@@ -115,9 +106,7 @@ void CGUIMainWindow::setupDockWidget()
 	//addDockWidget(Qt::RightDockWidgetArea ,m_pShortkeyDV);
 
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::setupMenuBar()"
 void CGUIMainWindow::setupMenuBar()
 {
 	QMenu *menu = menuBar()->addMenu(QString("&File"));//"&File"
@@ -187,18 +176,14 @@ void CGUIMainWindow::setupMenuBar()
 	action->setShortcut(tr("Ctrl+A"));
 	connect(action, SIGNAL(triggered()), this, SLOT(About()));
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::NewProject()"
 void CGUIMainWindow::NewProject()
 {
 	m_pProject->newProject();
 	setWindowTitle("Cargo Loading Planner .");
 	UpdateAll();
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::OpenProject()"
 void CGUIMainWindow::OpenProject()
 {
 	QString fileName = QFileDialog::getOpenFileName(
@@ -223,9 +208,7 @@ void CGUIMainWindow::OpenProject()
     m_pGLWidget->m_pProject = m_pProject;
 	return;
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::SaveProject()"
 void CGUIMainWindow::SaveProject()
 {
 	QFileInfo info(m_pProject->m_filePath);
@@ -242,9 +225,7 @@ void CGUIMainWindow::SaveProject()
 	else 
 		SaveProjectAs();
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::SaveProjectAs()"
 void CGUIMainWindow::SaveProjectAs()
 {
 	QFileDialog dlg(this);
@@ -262,26 +243,20 @@ void CGUIMainWindow::SaveProjectAs()
 	}
 
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWidow::CloseProject()"
 void CGUIMainWindow::CloseProject()
 {
 	m_pProject->closeProject();
 	setWindowTitle("Cargo Loading Planner .");
 }
-#pragma endregion 
 
-#pragma region "void CGUIMainWidow::PrjectSetting()"
 void CGUIMainWindow::PrjectSetting()
 {
 	/*CProjectSettingWidget widget(this,m_pProject);
 	((QWidget*)&widget)->setWindowTitle("Setting")s;
 	widget.exec();*/
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWindow::UpdateAll()"
 void CGUIMainWindow::UpdateAll()
 {
 	m_pCargoTab->m_pTable->m_pModel->RefreshList();
@@ -291,24 +266,18 @@ void CGUIMainWindow::UpdateAll()
 	m_pCurrentOrderListTab->m_pTable->m_pModel->RefreshList();
 
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWindow::Compute()"
 void CGUIMainWindow::Compute()
 {
 	m_pProject->Compute();
 	m_pPlanTree->CreateBody();
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWindow::onChangeMode()"
 void CGUIMainWindow::onChangeMode()
 {
 	m_pProject->m_fMode = m_pSequentialModeAction->isChecked();
 }
-#pragma endregion
 
-#pragma region "void CGUIMainWindow::resizeEvent ( QResizeEvent * event );"
 void CGUIMainWindow::resizeEvent ( QResizeEvent * event )
 {
 	if(m_fFirstTime)	
@@ -333,4 +302,3 @@ void CGUIMainWindow::resizeEvent ( QResizeEvent * event )
 
 	}
 }
-#pragma endregion

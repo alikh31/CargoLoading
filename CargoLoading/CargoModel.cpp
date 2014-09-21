@@ -1,26 +1,19 @@
-#pragma region "Includes"
 #include "CargoModel.h"
 #include "GUIMainWindow.h"
 
 
-#pragma endregion
 
-#pragma region "Constructor"
 CCargoModel::CCargoModel(CGUIMainWindow* pMainWindow)
 	: QAbstractTableModel()
 {
 	m_pMainWindow=pMainWindow;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCargoModel::~CCargoModel()
 {
 
 }
-#pragma endregion
 
-#pragma region "int CCargoModel::rowCount(const QModelIndex & ) const "
 int CCargoModel::rowCount(const QModelIndex & ) const 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -28,23 +21,17 @@ int CCargoModel::rowCount(const QModelIndex & ) const
 	int count=m_pMainWindow->m_pProject->m_CargoList.count();
 	return count;
 }
-#pragma endregion
 
-#pragma region "int CCargoModel::columnCount(const QModelIndex & ) const "
 int CCargoModel::columnCount(const QModelIndex & ) const 
 {
 	return 9;
 }
-#pragma endregion
 
-#pragma region "void CCargoModel::RefreshList()"
 void CCargoModel::RefreshList()
 {
     endResetModel();
 }
-#pragma endregion
 
-#pragma region "QVariant CCargoModel::data(const QModelIndex &index, int role) const "
 QVariant CCargoModel::data(const QModelIndex &index, int role) const 
 {
 
@@ -116,9 +103,7 @@ QVariant CCargoModel::data(const QModelIndex &index, int role) const
 	}
 	return QVariant();
 }
-#pragma endregion
 
-#pragma region "bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int role) "
 bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int role) 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -210,9 +195,7 @@ bool CCargoModel::setData(const QModelIndex &index, const QVariant &value, int r
 	}
 	return false;
 }
-#pragma endregion
 
-#pragma region "Qt::ItemFlags CCargoModel::flags(const QModelIndex &index) const "
 Qt::ItemFlags CCargoModel::flags(const QModelIndex &index) const 
 {
 	if (!index.isValid()) return Qt::ItemIsEnabled;
@@ -221,9 +204,7 @@ Qt::ItemFlags CCargoModel::flags(const QModelIndex &index) const
 	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 	
 }
-#pragma endregion
 
-#pragma region "QVariant CCargoModel::headerData(int section, Qt::Orientation orientation, int role) const  "
 QVariant CCargoModel::headerData(int section, Qt::Orientation orientation, int role) const  
 {
 	if (role != Qt::DisplayRole) return QVariant();
@@ -264,5 +245,4 @@ QVariant CCargoModel::headerData(int section, Qt::Orientation orientation, int r
 	}
 	return "";
 }
-#pragma endregion
 

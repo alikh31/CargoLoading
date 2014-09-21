@@ -1,26 +1,19 @@
-#pragma region "Includes"
 #include "PalleteModel.h"
 #include "GUIMainWindow.h"
 
 
-#pragma endregion
 
-#pragma region "Constructor"
 CPalleteModel::CPalleteModel(CGUIMainWindow* pMainWindow)
 : QAbstractTableModel()
 {
 	m_pMainWindow=pMainWindow;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CPalleteModel::~CPalleteModel()
 {
 
 }
-#pragma endregion
 
-#pragma region "int CPalleteModel::rowCount(const QModelIndex & ) const "
 int CPalleteModel::rowCount(const QModelIndex & ) const 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -28,23 +21,17 @@ int CPalleteModel::rowCount(const QModelIndex & ) const
 	int count=m_pMainWindow->m_pProject->m_PalleteList.count();
 	return count;
 }
-#pragma endregion
 
-#pragma region "int CPalleteModel::columnCount(const QModelIndex & ) const "
 int CPalleteModel::columnCount(const QModelIndex & ) const 
 {
 	return m_pMainWindow->m_pProject->m_PalleteList.count()+2;
 }
-#pragma endregion
 
-#pragma region "void CPalleteModel::RefreshList()"
 void CPalleteModel::RefreshList()
 {
 	endResetModel();
 }
-#pragma endregion
 
-#pragma region "QVariant CPalleteModel::data(const QModelIndex &index, int role) const "
 QVariant CPalleteModel::data(const QModelIndex &index, int role) const 
 {
 
@@ -103,9 +90,7 @@ QVariant CPalleteModel::data(const QModelIndex &index, int role) const
 	}
 	return QVariant();
 }
-#pragma endregion
 
-#pragma region "bool CPalleteModel::setData(const QModelIndex &index, const QVariant &value, int role) "
 bool CPalleteModel::setData(const QModelIndex &index, const QVariant &value, int role) 
 {
 	if(!m_pMainWindow || !m_pMainWindow->m_pProject)
@@ -144,9 +129,7 @@ bool CPalleteModel::setData(const QModelIndex &index, const QVariant &value, int
 	}
 	return false;
 }
-#pragma endregion
 
-#pragma region "Qt::ItemFlags CPalleteModel::flags(const QModelIndex &index) const "
 Qt::ItemFlags CPalleteModel::flags(const QModelIndex &index) const 
 {
 	if (!index.isValid()) return Qt::ItemIsEnabled;
@@ -155,9 +138,7 @@ Qt::ItemFlags CPalleteModel::flags(const QModelIndex &index) const
 	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 
 }
-#pragma endregion
 
-#pragma region "QVariant CPalleteModel::headerData(int section, Qt::Orientation orientation, int role) const  "
 QVariant CPalleteModel::headerData(int section, Qt::Orientation orientation, int role) const  
 {
 	if (role != Qt::DisplayRole) return QVariant();
@@ -183,5 +164,4 @@ QVariant CPalleteModel::headerData(int section, Qt::Orientation orientation, int
 	}
 	return "";
 }
-#pragma endregion
 

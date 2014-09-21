@@ -1,11 +1,7 @@
 
-
-#pragma region "Includes"
 #include "ProviderTable.h"
 #include "GUIMainWindow.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CProviderTable::CProviderTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 : QTableView(parent)
 {
@@ -21,16 +17,12 @@ CProviderTable::CProviderTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	SetupActions();
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CProviderTable::~CProviderTable()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CImageTable::SetupActions()"
 void CProviderTable::SetupActions()
 {
 	m_pMenu=new QMenu();
@@ -43,25 +35,19 @@ void CProviderTable::SetupActions()
 	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
-#pragma endregion
 
-#pragma region "void CProviderTable::AddNewRowEvent( )"
 void CProviderTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewProvider();
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void CProviderTable::DeleteEvent( )"
 void CProviderTable::DeleteEvent( )
 {
 
 }
-#pragma endregion
 
-#pragma region "void CProviderTable::RequestForContextMenuEvent	( const QPoint& point)"
 void CProviderTable::RequestForContextMenuEvent	( const QPoint& point)
 {
 	int test=10;
@@ -72,9 +58,7 @@ void CProviderTable::RequestForContextMenuEvent	( const QPoint& point)
 	if(m_SelectedIndexes.count()>0)
 		m_pMenu->exec(pnt);
 }
-#pragma endregion
 
-#pragma region "QModelIndexList CProviderTable::getSelectedRows()"
 QModelIndexList CProviderTable::getSelectedRows()
 {
 	QModelIndexList lstIndex ;
@@ -89,9 +73,7 @@ QModelIndexList CProviderTable::getSelectedRows()
 	}
 	return lstIndex;
 }
-#pragma endregion
 
-#pragma region "void CProviderTable::ReLoadModel()"
 void CProviderTable::ReLoadModel()
 {
 	return m_pModel->RefreshList();
@@ -101,4 +83,3 @@ void CProviderTable::ReLoadModel()
 	m_pModel=new CProviderModel(m_pMainWindow);
 	setModel(m_pModel);
 }
-#pragma endregion

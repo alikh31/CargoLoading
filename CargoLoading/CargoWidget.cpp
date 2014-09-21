@@ -1,12 +1,9 @@
-#pragma region "Includes"
 #include "CargoWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 //#include <QSpacerItem >
 #include "addcargo.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CCargoWidget::CCargoWidget(QString title , QWidget *parent,CGUIMainWindow* pMainWindow)
 	: QDockWidget(title , parent)
 {
@@ -45,16 +42,12 @@ CCargoWidget::CCargoWidget(QString title , QWidget *parent,CGUIMainWindow* pMain
 
 	m_pMainWindow->m_fFirstTime = true;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCargoWidget::~CCargoWidget()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CCargoWidget::SetupButton(QString Text,QPushButton* pButton,QString iconPath)"
 void CCargoWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pLayout)
 {
 	pButton->setText(Text);
@@ -63,9 +56,7 @@ void CCargoWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pL
 	pLayout->addWidget(pButton);
 
 }
-#pragma endregion
 
-#pragma region "void CCargoWidget::OnAddNewRow()"
 void CCargoWidget::OnAddNewRow(bool bOk)
 {
 	AddCargo pAddCargo(0, m_pMainWindow);
@@ -75,11 +66,8 @@ void CCargoWidget::OnAddNewRow(bool bOk)
 	m_pTable->AddNewRowEvent();
 
 }
-#pragma endregion
 
-#pragma region "void CCargoWidget::OnClearAllRows()"
 void CCargoWidget::OnClearAllRows(bool bOk)
 {
 
 }
-#pragma endregion

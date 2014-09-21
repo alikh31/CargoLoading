@@ -1,9 +1,6 @@
-#pragma region "Includes"
 #include "CarrierTable.h"
 #include "GUIMainWindow.h"
-#pragma endregion
 
-#pragma region "Constructor"
 CCarrierTable::CCarrierTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 : QTableView(parent)
 {
@@ -19,16 +16,12 @@ CCarrierTable::CCarrierTable(QWidget *parent,CGUIMainWindow* pMainWindow)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	SetupActions();
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CCarrierTable::~CCarrierTable()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CImageTable::SetupActions()"
 void CCarrierTable::SetupActions()
 {
 	m_pMenu=new QMenu();
@@ -41,23 +34,18 @@ void CCarrierTable::SetupActions()
 	m_pDeleteCurrentRowAct=m_pMenu->addAction(QString("Delete Selected"));//"Delete Selected"
 	connect(m_pDeleteCurrentRowAct, SIGNAL(triggered()),this, SLOT(DeleteEvent()));
 }
-#pragma endregion
 
-#pragma region "void CCarrierTable::AddNewRowEvent( )"
 void CCarrierTable::AddNewRowEvent( )
 {
 	//m_pMainWindow->m_pProject->AddNewCarrier();
 	ReLoadModel();
 
 }
-#pragma endregion
 
-#pragma region "void CCarrierTable::DeleteEvent( )"
 void CCarrierTable::DeleteEvent( )
 {
 
 }
-#pragma endregion
 
 void CCarrierTable::mouseDoubleClickEvent ( QMouseEvent * event )
 {
@@ -65,7 +53,6 @@ void CCarrierTable::mouseDoubleClickEvent ( QMouseEvent * event )
 	CCarrierTable::edit(indexAt(event->pos()));
 }
 
-#pragma region "void CCarrierTable::RequestForContextMenuEvent	( const QPoint& point)"
 void CCarrierTable::RequestForContextMenuEvent	( const QPoint& point)
 {
 	int test=10;
@@ -76,9 +63,7 @@ void CCarrierTable::RequestForContextMenuEvent	( const QPoint& point)
 	if(m_SelectedIndexes.count()>0)
 		m_pMenu->exec(pnt);
 }
-#pragma endregion
 
-#pragma region "QModelIndexList CCarrierTable::getSelectedRows()"
 QModelIndexList CCarrierTable::getSelectedRows()
 {
 	QModelIndexList lstIndex ;
@@ -93,9 +78,7 @@ QModelIndexList CCarrierTable::getSelectedRows()
 	}
 	return lstIndex;
 }
-#pragma endregion
 
-#pragma region "void CCarrierTable::ReLoadModel()"
 void CCarrierTable::ReLoadModel()
 {
 	return m_pModel->RefreshList();
@@ -105,4 +88,3 @@ void CCarrierTable::ReLoadModel()
 	m_pModel=new CCarrierModel(m_pMainWindow);
 	setModel(m_pModel);
 }
-#pragma endregion

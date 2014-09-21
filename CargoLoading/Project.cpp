@@ -1,4 +1,3 @@
-#pragma region "Includes"
 #include "Project.h"
 #include <QFile>
 #include <QByteArray>
@@ -12,9 +11,7 @@ int __Pallete::PalleteCounter=0;
 int __Order::OrderCounter=0;
 int Path::PathCounter=1;
 int Node::NodeCounter=1;
-#pragma endregion
 
-#pragma region "CProject::CProject(void)"
 CProject::CProject(void)
 {
 	m_fMode = false;
@@ -73,9 +70,7 @@ CProject::CProject(void)
 	}
 		
 }
-#pragma endregion
 
-#pragma region "CProject::~CProject(void)"
 CProject::~CProject(void)
 {
 
@@ -140,50 +135,38 @@ CProject::~CProject(void)
 	ClearAll();
 
 }
-#pragma endregion
 
-#pragma region "void CProject::AddNewCargo()"
 void CProject::AddNewCargo()
 {
 	__BoxRow* cargo=new __BoxRow;
 	m_CargoList.append(cargo);
 
 }
-#pragma endregion
 
-#pragma region "void CProject::AddNewProvider()"
 void CProject::AddNewProvider()
 {
 	__Provider* prov=new __Provider;
 	m_ProviderList.append(prov);
 }
-#pragma endregion
 
-#pragma region "void CProject::AddNewCarrier()"
 void CProject::AddNewCarrier()
 {
 	__Carrier* car=new __Carrier;
 	m_CarrierList.append(car);
 }
-#pragma endregion
 
-#pragma region "void CProject::AddNewPallete()"
 void CProject::AddNewPallete()
 {
 	__Pallete* pal=new __Pallete;
 	m_PalleteList.append(pal);
 }
-#pragma endregion 
 
-#pragma region "void CProject::AddNewOrder()"
 void CProject::AddNewOrder()
 {
 	__Order* ord=new __Order;
 	m_OrderList.append(ord);
 }
-#pragma endregion 
 
-#pragma region "void CProject::ClearAll()"
 void CProject::ClearAll()
 {
     /*delete m_pBuff;
@@ -219,23 +202,17 @@ void CProject::ClearAll()
     }*/
 	m_OrderList.clear();
 }
-#pragma endregion 
 
-#pragma region "void CProject::newProject()"
 void CProject::newProject()
 {
 	ClearAll();
 }
-#pragma endregion 
 
-#pragma region "void CProject::closeProject()"
 void CProject::closeProject()
 {
 
 }
-#pragma endregion 
 
-#pragma region "bool CProject::Open(QString fileName)"
 bool CProject::Open(QString fileName)
 {
 	m_filePath = fileName;
@@ -273,17 +250,13 @@ bool CProject::Open(QString fileName)
 
 	return true;
 }
-#pragma endregion 
 
-#pragma region "void CProject::Save()"
 void CProject::Save()
 {
 
 
 }
-#pragma endregion 
 
-#pragma region "void CProject::SaveAs(QString fileName)"
 void CProject::SaveAs(QString fileName)
 {
 	m_pBuff->ClearMem();
@@ -307,9 +280,7 @@ void CProject::SaveAs(QString fileName)
 	return ;
 
 }
-#pragma endregion 
 
-#pragma region "__BoxRow* CProject::GetBox(int id)" 
 __BoxRow* CProject::GetBox(int id)
 {
 	for(int i=0;i<m_CargoList.count();i++)
@@ -320,9 +291,7 @@ __BoxRow* CProject::GetBox(int id)
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region "__BoxRow* CProject::GetBoxByName			(QString name)"
 __BoxRow* CProject::GetBoxByName			(QString name)
 {
 	for(int i=0;i<m_CargoList.count();i++)
@@ -334,9 +303,7 @@ __BoxRow* CProject::GetBoxByName			(QString name)
 	return NULL;
 
 }
-#pragma endregion
 
-#pragma region "__Provider* CProject::GetProvider(int id)"
 __Provider* CProject::GetProvider(int id)
 {
 	for(int i=0;i<m_ProviderList.count();i++)
@@ -347,9 +314,7 @@ __Provider* CProject::GetProvider(int id)
 	}
 	return NULL;
 }
-#pragma endregion 
 
-#pragma region "__Provider* CProject::GetProviderByName(QString name)"
 __Provider* CProject::GetProviderByName(QString name)
 {
 		for(int i=0;i<m_ProviderList.count();i++)
@@ -360,9 +325,7 @@ __Provider* CProject::GetProviderByName(QString name)
 	}
 	return NULL;
 }
-#pragma endregion
 
-#pragma region  "void CProject::Compute()"
 void CProject::Compute()
 {
 	
@@ -420,9 +383,7 @@ void CProject::Compute()
     
 	return ;
 }
-#pragma endregion 
 
-#pragma region "void CProject::ComputeByTSPack()"
 void CProject::ComputeByTSPack()
 {
 
@@ -514,5 +475,4 @@ void CProject::ComputeByTSPack()
 	//}
 
 }
-#pragma endregion
 

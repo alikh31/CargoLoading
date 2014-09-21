@@ -1,13 +1,9 @@
-
-#pragma region "Includes"
 #include <QList>
 #include <QSize>
 #include <QString>
 #include "Buffer.h"
 #include <math.h>
-#pragma endregion
 
-#pragma region "Box Row"
 struct __BoxRow
 {
 	__BoxRow()
@@ -74,9 +70,7 @@ struct __BoxRow
 		MaxLoad=pBuffer->GetHeadI();
 	}
 };
-#pragma endregion
 
-#pragma region "BoxInContainer"
 struct __BoxInContainer
 {
 	__BoxInContainer()
@@ -121,9 +115,7 @@ struct __BoxInContainer
 
 	int ContainerID;
 };
-#pragma endregion
 
-#pragma region "Provider Row"
 struct __Provider
 {
 	__Provider()
@@ -168,9 +160,7 @@ struct __Provider
 		landa=pBuffer->GetHeadD();
 	}
 };
-#pragma endregion
 
-#pragma region "CArea"
 class __CArea
 {
 public:
@@ -217,9 +207,7 @@ public:
 		return false;
 	}
 };
-#pragma endregion
 
-#pragma region "Carrier Row"
 class __Carrier
 {
 public:
@@ -333,9 +321,7 @@ public:
 		VahicleType=pBuffer->GetHeadI();
 	}
 };
-#pragma endregion
 
-#pragma region "Pallete Row"
 struct __Pallete
 {
 	__Pallete()
@@ -372,9 +358,7 @@ struct __Pallete
 		}
 	}
 };
-#pragma endregion
 
-#pragma region "Order Row"
 struct __Order
 {
 	__Order()
@@ -437,9 +421,7 @@ struct __Order
 		ProviderID=pBuffer->GetHeadI();
 	}
 };
-#pragma endregion
 
-#pragma region "Node"
 class Node
 {
 public:
@@ -488,9 +470,7 @@ public:
 		return false;
 	}
 };
-#pragma endregion
 
-#pragma region "Path"
 class Path
 {
 public:
@@ -659,4 +639,3 @@ public:
 	}
 
 };
-#pragma endregion

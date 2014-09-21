@@ -1,14 +1,9 @@
-
-
-#pragma region "Includes"
 #include "ProviderWidget.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 //#include <QSpacerItem >
 #include <addprovider.h>
-#pragma endregion
 
-#pragma region "Constructor"
 CProviderWidget::CProviderWidget(QString title , QWidget *parent,CGUIMainWindow* pMainWindow)
 : QDockWidget(title , parent)
 {  
@@ -46,16 +41,12 @@ CProviderWidget::CProviderWidget(QString title , QWidget *parent,CGUIMainWindow*
 
 	pMainWindow->m_fFirstTime = true;
 }
-#pragma endregion
 
-#pragma region "DeConstructor"
 CProviderWidget::~CProviderWidget()
 {
 
 }
-#pragma endregion
 
-#pragma region "void CProviderWidget::SetupButton(QString Text,QPushButton* pButton,QString iconPath)"
 void CProviderWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout* pLayout)
 {
 	pButton->setText(Text);
@@ -64,9 +55,7 @@ void CProviderWidget::SetupButton(QString Text,QPushButton* pButton,QHBoxLayout*
 	pLayout->addWidget(pButton);
 
 }
-#pragma endregion
 
-#pragma region "void CProviderWidget::OnAddNewRow()"
 void CProviderWidget::OnAddNewRow(bool bOk)
 
 {
@@ -78,11 +67,8 @@ void CProviderWidget::OnAddNewRow(bool bOk)
 
 
 }
-#pragma endregion
 
-#pragma region "void CProviderWidget::OnClearAllRows()"
 void CProviderWidget::OnClearAllRows(bool bOk)
 {
 
 }
-#pragma endregion
