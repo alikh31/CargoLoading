@@ -82,7 +82,7 @@ QVariant COrderModel::data(const QModelIndex &index, int role) const
 		__BoxRow* box=m_pMainWindow->m_pProject->GetBox(rowData->BoxID);
 		__Provider* provider=m_pMainWindow->m_pProject->GetProvider(rowData->ProviderID);
 		QString tmp;
-		QDate GDate(1360 , 1 , 1);			
+        QDate GDate(2014 , 1 , 1);
         //CJalaliCalendar calender;
 		int day , month , year;
 
@@ -168,9 +168,9 @@ bool COrderModel::setData(const QModelIndex &index, const QVariant &value, int r
 
 			QDate GDate(year , month , day);
 
-			int minTime=QDate(1360,1,1).daysTo(GDate);
+            int minTime=QDate(2014,1,1).daysTo(GDate);
 
-			if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 1360)
+            if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 2014)
 				return false;
 
 			rowData->minTime=minTime;
@@ -186,9 +186,9 @@ bool COrderModel::setData(const QModelIndex &index, const QVariant &value, int r
 
 			QDate GDate(year , month , day);
 
-			int maxTime=QDate(1360,1,1).daysTo(GDate);
+            int maxTime=QDate(2014,1,1).daysTo(GDate);
 
-			if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 1360)
+            if(!bOk || day>31 || day < 1 || month < 1 || month > 12 || year < 2014)
 				return false;
 
 			rowData->maxTime=maxTime;

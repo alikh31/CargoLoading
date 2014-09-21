@@ -160,4 +160,6 @@ CargoLoading/GeneratedFiles/
 CargoLoading/Debug/
 CargoLoading/Release/
 
+build-CargoLoading-Desktop_Qt_5_3_clang_64bit-Debug/
+
 *.v11.suo

@@ -36,7 +36,7 @@ struct __BoxRow
 
 	bool    Priority ;
 	int     MaxLoad;//kg
-	static int BoxCounter;
+    static int BoxCounter;
 
 	void SaveToBuffer(CBuffer* pBuffer)
 	{

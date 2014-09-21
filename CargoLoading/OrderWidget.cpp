@@ -72,6 +72,5 @@ void COrderWidget::OnClearAllRows(bool bOk)
 
 void COrderWidget::OnCompute(bool bOk)
 {
-	m_pMainWindow->m_pProject->Compute();
-	m_pMainWindow->m_pPlanTree->CreateBody();
+    m_pMainWindow->Compute();
 }

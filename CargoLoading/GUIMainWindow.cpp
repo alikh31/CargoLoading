@@ -271,6 +271,7 @@ void CGUIMainWindow::Compute()
     m_pGLWidget->m_pProject = m_pProject;
 	m_pProject->Compute();
 	m_pPlanTree->CreateBody();
+    m_pGLWidget->update();
 }
 
 void CGUIMainWindow::onChangeMode()

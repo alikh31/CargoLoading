@@ -56,14 +56,14 @@ void AddCargo::onClickedAccept()
 	temp->Desc= lineEdit_2->displayText();
 	if(temp->Desc==NULL)
     {
-        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Description is Empty"));//"tozihat vared nashodeh ast"
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Description is Empty"));
         return;
     }
     temp->FloorIndex=lineEdit_8->displayText();	
     temp->MaxLoad=lineEdit_10->displayText().toInt();
     if(temp->MaxLoad==NULL)
     {
-        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Max weight has been enter wrong"));//"bishineh bar eshtebah ast" 
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Max weight has been enter wrong"));
         return;
     }
 
@@ -72,9 +72,9 @@ void AddCargo::onClickedAccept()
     temp->PaleteSizeW=lineEdit_12->displayText().toInt();
     temp->Priority=lineEdit_9->displayText().toInt();
     temp->PaleteWeight=lineEdit_7->displayText().toInt();
-    if(temp->PaleteSizeH==NULL||temp->PaleteSizeD==NULL||temp->PaleteSizeW==NULL||temp->PaleteWeight==NULL)
+    if(temp->PaleteSizeH == 0 || temp->PaleteSizeD == 0 || temp->PaleteSizeW == 0 || temp->PaleteWeight == 0)
     {
-        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Height, Width or weight has been enter wrong"));//"tol ya arz ya ertefae ya vazn vared nashodeh ast" 
+        int ret = QMessageBox::warning(this, QString("Warning!"),QString( "Height, Width or weight has been enter wrong"));
         return;
     }
 

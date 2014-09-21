@@ -14,6 +14,14 @@ int Node::NodeCounter=1;
 
 CProject::CProject(void)
 {
+    __BoxRow::BoxCounter = 1;
+    __Provider::ProviderCounter = 1;
+    __Carrier::CarrierCounter = 1;
+    __Pallete::PalleteCounter = 1;
+    __Order::OrderCounter = 1;
+    Node::NodeCounter = 1;
+    Path::PathCounter = 1;
+
 	m_fMode = false;
 	m_pBuff=new CBuffer();
 
@@ -370,14 +378,14 @@ void CProject::Compute()
     m_pCPathOptimizer->Compute(mString);
 
 
-   /* m_pCPathOptimizer->Optimization();
-    m_pCPathOptimizer->fillAllPath();
+    //m_pCPathOptimizer->Optimization();
+    //m_pCPathOptimizer->fillAllPath();
 
-    m_pCPathOptimizer->OptimizeCarrier();
+    //m_pCPathOptimizer->OptimizeCarrier();
 
 
     if(!m_fMode)
-    m_pCPathOptimizer->ReArange();*/
+        m_pCPathOptimizer->ReArange();
 
     m_AllPathes = m_pCPathOptimizer->m_AllPathes;
     
