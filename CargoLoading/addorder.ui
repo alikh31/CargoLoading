@@ -28,7 +28,7 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>46</width>
+     <width>61</width>
      <height>16</height>
     </rect>
    </property>
@@ -112,7 +112,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>max time</string>
+    <string>min time</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -125,7 +125,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>min time</string>
+    <string>max time</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">

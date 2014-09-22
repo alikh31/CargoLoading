@@ -20,19 +20,19 @@ AddCargo::AddCargo(QWidget *parent,CGUIMainWindow* pMainWindow)
 
 
 	
-__BoxRow* temp = new __BoxRow();
+    __BoxRow temp;
 
-	lineEdit->setText(tr("%1").arg(temp->id));
+	lineEdit->setText(tr("%1").arg(temp.id));
 	lineEdit->setReadOnly(true);
-	lineEdit_11->setText(temp->Color);
-	lineEdit_2->setText(temp->Desc);
-	lineEdit_8->setText(temp->FloorIndex);
-	lineEdit_10->setText(tr("%1").arg(temp->MaxLoad));
-	lineEdit_14->setText(tr("%1").arg(temp->PaleteSizeH));
-	lineEdit_13->setText(tr("%1").arg(temp->PaleteSizeD));
-	lineEdit_12->setText(tr("%1").arg(temp->PaleteSizeW));
-	lineEdit_9->setText(tr("%1").arg(temp->Priority));
-	lineEdit_7->setText(tr("%1").arg(temp->PaleteWeight));
+	lineEdit_11->setText(temp.Color);
+	lineEdit_2->setText(temp.Desc);
+	lineEdit_8->setText(temp.FloorIndex);
+	lineEdit_10->setText(tr("%1").arg(temp.MaxLoad));
+	lineEdit_14->setText(tr("%1").arg(temp.PaleteSizeH));
+	lineEdit_13->setText(tr("%1").arg(temp.PaleteSizeD));
+	lineEdit_12->setText(tr("%1").arg(temp.PaleteSizeW));
+	lineEdit_9->setText(tr("%1").arg(temp.Priority));
+	lineEdit_7->setText(tr("%1").arg(temp.PaleteWeight));
 
 
 
