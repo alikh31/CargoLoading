@@ -199,12 +199,21 @@ void GLWidget::paintGL(){
                     }
                 }
 
-                drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->d*.9f)/norm,float(tB->h*.9f)/norm,r,g,b);  
+                if(NodeID == tB->NodeId)
+                {
+                    drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->d*.9f)/norm,float(tB->h*.9f)/norm,r,g,b,.9f);
+                }
+                else if(NodeID == -1)
+                {
+                    drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->d*.9f)/norm,float(tB->h*.9f)/norm,r,g,b);
+                }
+                else
+                {
+                    drawCube(float(tB->x)/norm,float(tB->z)/norm,float(tB->y)/norm,float(tB->w*.9f)/norm,float(tB->d*.9f)/norm,float(tB->h*.9f)/norm,r,g,b,.1f);
+                }
             }
         }
     }
-
- 
 }
 
 void GLWidget::wheelEvent(QWheelEvent *e)
@@ -213,10 +222,8 @@ void GLWidget::wheelEvent(QWheelEvent *e)
     updateGL();
 }
 
-void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b)
+void GLWidget::drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b , float t )
 {
-    float t = 0.4f;
-
     w *= .5f;
     h *= .5f;
     d *= .5f;

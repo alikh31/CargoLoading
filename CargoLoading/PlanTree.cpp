@@ -69,11 +69,14 @@ void CPlanTree::itemDoubleClickedEvent ( QTreeWidgetItem * item, int column )
 void CPlanTree::itemClickedEvent( QTreeWidgetItem * item, int column ) 
 {
 	if(item->parent()){
-        return;
+        m_pMainWindow->m_pGLWidget->path = GetPath(item->parent()->text(0).toInt());
+        m_pMainWindow->m_pGLWidget->NodeID = item->text(0).toInt();
+        m_pMainWindow->m_pGLWidget->update();
     }
-		//m_pMainWindow->m_pMainWidget->path = GetPath(item->text(0).toInt());// ->Update(GetPath(item->parent()->text(0).toInt()),item->text(0).toInt());
-	else{
+
+    else{
 		m_pMainWindow->m_pGLWidget->path = GetPath(item->text(0).toInt());
+        m_pMainWindow->m_pGLWidget->NodeID = -1;
         m_pMainWindow->m_pGLWidget->update();
     }
 }

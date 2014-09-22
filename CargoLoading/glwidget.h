@@ -26,7 +26,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *e);
     void wheelEvent(QWheelEvent *);
 
-    void drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b);
+    void drawCube(float x, float y, float z, float w, float h, float d, float r, float g, float b, float t = .4f );
 
 public slots:
     void setXRotation(int angle);
